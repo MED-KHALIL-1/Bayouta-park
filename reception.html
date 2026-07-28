@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bayouta Park - Réception</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f0e8;
+    color: #2b2520;
+}
+
+header {
+    background: #2b2520;
+    color: #f5f0e8;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+.status-bar {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.connection {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.orders-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 15px 50px;
+}
+
+.section-title {
+    margin: 25px 0 15px;
+}
+
+.order-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #d6b77c;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.order-number {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.table {
+    background: #d6b77c;
+    color: #2b2520;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.customer {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.items {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+.order-time {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.accept {
+    background: #2e7d32;
+    color: white;
+    flex: 1;
+}
+
+.reject {
+    background: #b33a2b;
+    color: white;
+    flex: 1;
+}
+
+.no-orders {
+    text-align: center;
+    background: white;
+    padding: 40px 20px;
+    border-radius: 12px;
+    color: #777;
+}
+
+.loading {
+    text-align: center;
+    padding: 30px;
+}
+
+@media (max-width: 500px) {
+    .buttons {
+        flex-direction: column;
+    }
+
+    .order-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+BAYOUTA PARK
+</div>
+
+<div class="subtitle">
+Tableau de réception
+</div>
+
+</header>
+
+
+<div class="status-bar">
+
+<div class="connection" id="connection">
+Connexion à Firebase...
+</div>
+
+</div>
+
+
+<main class="orders-container">
+
+<h2 class="section-title">
+Nouvelles commandes
+</h2>
+
+<div id="orders">
+
+<div class="loading">
+Chargement des commandes...
+</div>
+
+</div>
+
+</main>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    onSnapshot,
+    doc,
+    updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyAbG_ateon42nWNrlK0QnyTHNwyxGop2ow",
+
+    authDomain:
+    "restaurant-ordering-syst-915da.firebaseapp.com",
+
+    projectId:
+    "restaurant-ordering-syst-915da",
+
+    storageBucket:
+    "restaurant-ordering-syst-915da.firebasestorage.app",
+
+    messagingSenderId:
+    "129974228020",
+
+    appId:
+    "1:129974228020:web:bfe09a72dee9f73c152661"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+
+const db =
+getFirestore(app);
+
+
+const ordersContainer =
+document.getElementById("orders");
+
+
+const connection =
+document.getElementById("connection");
+
+
+/* LOAD NEW ORDERS */
+
+const ordersQuery = query(
+
+    collection(db, "orders"),
+
+    where("status", "==", "new")
+
+);
+
+
+onSnapshot(
+
+    ordersQuery,
+
+    (snapshot) => {
+
+        connection.textContent =
+        "🟢 Connecté — Réception des commandes en direct";
+
+
+        if (snapshot.empty) {
+
+            ordersContainer.innerHTML = `
+
+            <div class="no-orders">
+
+            <h3>Aucune nouvelle commande</h3>
+
+            <p>
+            Les nouvelles commandes apparaîtront ici automatiquement.
+            </p>
+
+            </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        ordersContainer.innerHTML = "";
+
+
+        snapshot.forEach(
+
+            (orderDoc) => {
+
+                const order =
+                orderDoc.data();
+
+
+                const orderId =
+                orderDoc.id;
+
+
+                displayOrder(
+
+                    orderId,
+
+                    order
+
+                );
+
+            }
+
+        );
+
+    },
+
+    (error) => {
+
+        console.error(error);
+
+
+        connection.textContent =
+        "🔴 Erreur de connexion";
+
+
+        connection.style.background =
+        "#ffebee";
+
+
+        connection.style.color =
+        "#c62828";
+
+    }
+
+);
+
+
+/* DISPLAY ORDER */
+
+function displayOrder(
+
+    orderId,
+
+    order
+
+) {
+
+    const card =
+    document.createElement("div");
+
+
+    card.className =
+    "order-card";
+
+
+    let itemsHTML = "";
+
+
+    order.items.forEach(
+
+        (item) => {
+
+            itemsHTML += `
+
+            <div class="item">
+
+            <span>
+            ${item.quantity} × ${item.name}
+            </span>
+
+            <span>
+            ${item.price * item.quantity} TND
+            </span>
+
+            </div>
+
+            `;
+
+        }
+
+    );
+
+
+    let timeText =
+    "Heure inconnue";
+
+
+    if (order.createdAt) {
+
+        const date =
+        order.createdAt.toDate();
+
+
+        timeText =
+        date.toLocaleString("fr-FR");
+
+    }
+
+
+    const shortId =
+    orderId
+    .substring(0, 6)
+    .toUpperCase();
+
+
+    card.innerHTML = `
+
+    <div class="order-header">
+
+        <div class="order-number">
+
+        Commande #${shortId}
+
+        </div>
+
+
+        <div class="table">
+
+        🪑 Table ${order.tableNumber}
+
+        </div>
+
+    </div>
+
+
+    <div class="customer">
+
+    👤 ${order.customerName || "Client"}
+
+    </div>
+
+
+    <div class="order-time">
+
+    🕐 ${timeText}
+
+    </div>
+
+
+    <div class="items">
+
+    ${itemsHTML}
+
+    </div>
+
+
+    <div class="total">
+
+    <span>Total</span>
+
+    <span>${order.total} TND</span>
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+        class="accept"
+        onclick="changeOrderStatus('${orderId}', 'accepted')"
+        >
+
+        ✓ Accepter
+
+        </button>
+
+
+        <button
+        class="reject"
+        onclick="changeOrderStatus('${orderId}', 'rejected')"
+        >
+
+        ✕ Refuser
+
+        </button>
+
+    </div>
+
+    `;
+
+
+    ordersContainer.appendChild(card);
+
+}
+
+
+/* CHANGE ORDER STATUS */
+
+window.changeOrderStatus =
+async function(
+
+    orderId,
+
+    newStatus
+
+) {
+
+    try {
+
+        await updateDoc(
+
+            doc(
+
+                db,
+
+                "orders",
+
+                orderId
+
+            ),
+
+            {
+
+                status:
+                newStatus
+
+            }
+
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+
+        alert(
+
+        "Impossible de modifier la commande."
+
+        );
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
