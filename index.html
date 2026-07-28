@@ -8,8 +8,6 @@
 
 <style>
 
-/* ================= GENERAL ================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,7 +16,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 125px;
+    scroll-padding-top: 130px;
 }
 
 body {
@@ -37,17 +35,17 @@ header {
 }
 
 .logo {
-    font-size: 32px;
+    font-size: 30px;
     font-weight: bold;
     letter-spacing: 2px;
 }
 
 .subtitle {
-    margin-top: 8px;
+    margin-top: 7px;
     opacity: 0.8;
 }
 
-/* ================= CATEGORY NAVIGATION ================= */
+/* ================= CATEGORY NAV ================= */
 
 .menu-nav {
     position: sticky;
@@ -75,6 +73,8 @@ header {
 }
 
 .menu-nav a {
+    flex-shrink: 0;
+
     text-decoration: none;
 
     color: #2b2520;
@@ -86,26 +86,20 @@ header {
     border-radius: 25px;
 
     font-weight: bold;
-
-    transition: 0.2s;
 }
 
 .menu-nav a:hover {
     background: #d6b77c;
 }
 
-.menu-nav a:active {
-    background: #d6b77c;
-}
-
 /* ================= MENU ================= */
 
 .menu-container {
-    max-width: 1000px;
+    max-width: 1100px;
 
     margin: auto;
 
-    padding: 20px 15px 120px;
+    padding: 25px 15px 120px;
 }
 
 .category {
@@ -113,7 +107,7 @@ header {
 }
 
 .category-title {
-    font-size: 28px;
+    font-size: 27px;
 
     margin-bottom: 20px;
 
@@ -122,22 +116,22 @@ header {
     border-bottom: 3px solid #d6b77c;
 }
 
-/* ================= PRODUCTS ================= */
-
 .products {
     display: grid;
 
     grid-template-columns:
     repeat(
-    auto-fit,
-    minmax(
-    220px,
-    1fr
-    )
+        auto-fit,
+        minmax(
+            220px,
+            1fr
+        )
     );
 
     gap: 20px;
 }
+
+/* ================= PRODUCT ================= */
 
 .product {
     background: white;
@@ -149,10 +143,10 @@ header {
     box-shadow:
     0 4px 15px
     rgba(
-    0,
-    0,
-    0,
-    0.08
+        0,
+        0,
+        0,
+        0.08
     );
 }
 
@@ -162,8 +156,6 @@ header {
     height: 180px;
 
     object-fit: cover;
-
-    background: #ddd;
 }
 
 .product-content {
@@ -179,13 +171,13 @@ header {
 }
 
 .product-description {
-    color: #777;
-
     font-size: 14px;
 
-    line-height: 1.4;
+    color: #777;
 
     margin-bottom: 12px;
+
+    line-height: 1.4;
 }
 
 .product-bottom {
@@ -220,11 +212,7 @@ header {
     font-weight: bold;
 }
 
-.add-button:hover {
-    background: #4a4038;
-}
-
-/* ================= CART BUTTON ================= */
+/* ================= CART ICON ================= */
 
 .cart-button {
     position: fixed;
@@ -233,11 +221,9 @@ header {
 
     bottom: 20px;
 
-    z-index: 2000;
+    width: 62px;
 
-    width: 60px;
-
-    height: 60px;
+    height: 62px;
 
     border-radius: 50%;
 
@@ -247,17 +233,19 @@ header {
 
     color: white;
 
-    font-size: 25px;
+    font-size: 27px;
 
     cursor: pointer;
+
+    z-index: 2000;
 
     box-shadow:
     0 5px 20px
     rgba(
-    0,
-    0,
-    0,
-    0.25
+        0,
+        0,
+        0,
+        0.3
     );
 }
 
@@ -268,15 +256,15 @@ header {
 
     right: -5px;
 
-    background: #d6b77c;
-
-    color: #2b2520;
-
     width: 24px;
 
     height: 24px;
 
     border-radius: 50%;
+
+    background: #d6b77c;
+
+    color: #2b2520;
 
     display: flex;
 
@@ -289,7 +277,7 @@ header {
     font-weight: bold;
 }
 
-/* ================= CART OVERLAY ================= */
+/* ================= CART ================= */
 
 .cart-overlay {
     display: none;
@@ -300,10 +288,10 @@ header {
 
     background:
     rgba(
-    0,
-    0,
-    0,
-    0.5
+        0,
+        0,
+        0,
+        0.5
     );
 
     z-index: 3000;
@@ -313,34 +301,29 @@ header {
     display: block;
 }
 
-/* ================= CART ================= */
-
 .cart {
     position: fixed;
 
-    right: 0;
-
     top: 0;
 
-    height: 100vh;
+    right: 0;
 
     width: 100%;
 
     max-width: 450px;
+
+    height: 100vh;
 
     background: white;
 
     z-index: 4000;
 
     transform:
-    translateX(
-    100%
-    );
+    translateX(100%);
 
     transition:
     transform
-    0.3s
-    ease;
+    0.3s;
 
     display: flex;
 
@@ -349,9 +332,7 @@ header {
 
 .cart.active {
     transform:
-    translateX(
-    0
-    );
+    translateX(0);
 }
 
 .cart-header {
@@ -363,9 +344,9 @@ header {
 
     display: flex;
 
-    justify-content: space-between;
-
     align-items: center;
+
+    justify-content: space-between;
 }
 
 .close-cart {
@@ -375,7 +356,7 @@ header {
 
     color: white;
 
-    font-size: 25px;
+    font-size: 28px;
 
     cursor: pointer;
 }
@@ -388,21 +369,26 @@ header {
     padding: 15px;
 }
 
+.empty-cart {
+    text-align: center;
+
+    color: #777;
+
+    padding: 40px 10px;
+}
+
 .cart-item {
     display: flex;
+
+    align-items: center;
 
     justify-content: space-between;
 
     gap: 10px;
 
-    padding: 12px 0;
+    padding: 15px 0;
 
-    border-bottom:
-    1px solid #eee;
-}
-
-.cart-item-info {
-    flex: 1;
+    border-bottom: 1px solid #eee;
 }
 
 .cart-item-name {
@@ -424,9 +410,9 @@ header {
 }
 
 .quantity-controls button {
-    width: 28px;
+    width: 30px;
 
-    height: 28px;
+    height: 30px;
 
     border: none;
 
@@ -436,14 +422,15 @@ header {
 
     cursor: pointer;
 
-    font-weight: bold;
+    font-size: 18px;
 }
+
+/* ================= CART FOOTER ================= */
 
 .cart-footer {
     padding: 20px;
 
-    border-top:
-    1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 .cart-total {
@@ -455,17 +442,42 @@ header {
 
     font-weight: bold;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
-/* ================= ORDER FORM ================= */
+/* ================= TABLE SELECTION ================= */
 
-.order-form input {
+.table-label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+.table-select {
     width: 100%;
 
     padding: 13px;
 
-    margin-bottom: 10px;
+    border:
+    1px solid #ddd;
+
+    border-radius: 7px;
+
+    background: white;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+/* ================= CUSTOMER ================= */
+
+.customer-input {
+    width: 100%;
+
+    padding: 13px;
 
     border:
     1px solid #ddd;
@@ -473,7 +485,11 @@ header {
     border-radius: 7px;
 
     font-size: 15px;
+
+    margin-bottom: 12px;
 }
+
+/* ================= ORDER BUTTON ================= */
 
 .order-button {
     width: 100%;
@@ -497,19 +513,9 @@ header {
 
 .order-button:disabled {
     background: #999;
-
-    cursor: not-allowed;
 }
 
-.empty-cart {
-    text-align: center;
-
-    color: #777;
-
-    padding: 40px 10px;
-}
-
-/* ================= SUCCESS MESSAGE ================= */
+/* ================= SUCCESS ================= */
 
 .success-message {
     display: none;
@@ -522,10 +528,10 @@ header {
 
     background:
     rgba(
-    0,
-    0,
-    0,
-    0.6
+        0,
+        0,
+        0,
+        0.6
     );
 
     align-items: center;
@@ -544,9 +550,9 @@ header {
 
     text-align: center;
 
-    max-width: 400px;
-
     width: 100%;
+
+    max-width: 400px;
 }
 
 .success-box h2 {
@@ -577,16 +583,9 @@ header {
 
 @media (max-width: 600px) {
 
-    .logo {
-        font-size: 27px;
-    }
-
-    .category-title {
-        font-size: 24px;
-    }
-
     .products {
         grid-template-columns: 1fr 1fr;
+
         gap: 12px;
     }
 
@@ -630,11 +629,11 @@ header {
 <header>
 
     <div class="logo">
-    BAYOUTA PARK
+        BAYOUTA PARK
     </div>
 
     <div class="subtitle">
-    Notre Menu
+        Notre Menu
     </div>
 
 </header>
@@ -645,19 +644,19 @@ header {
 <nav class="menu-nav">
 
     <a href="#entrees">
-    🥗 Entrées
+        🥗 Entrées
     </a>
 
     <a href="#plats">
-    🍽️ Plats
+        🍽️ Plats
     </a>
 
     <a href="#desserts">
-    🍰 Desserts
+        🍰 Desserts
     </a>
 
     <a href="#boissons">
-    🥤 Boissons
+        🥤 Boissons
     </a>
 
 </nav>
@@ -678,7 +677,6 @@ class="category">
 🥗 Entrées
 </h2>
 
-
 <div class="products">
 
 
@@ -686,8 +684,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
-alt="Salade">
+src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -707,10 +704,7 @@ Salade fraîche avec légumes de saison.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Salade Fraîche',
-12
-)">
+onclick="addToCart('Salade Fraîche',12)">
 
 Ajouter
 
@@ -727,8 +721,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80"
-alt="Bruschetta">
+src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -748,10 +741,7 @@ Pain grillé avec tomates et herbes.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Bruschetta',
-10
-)">
+onclick="addToCart('Bruschetta',10)">
 
 Ajouter
 
@@ -762,7 +752,6 @@ Ajouter
 </div>
 
 </div>
-
 
 </div>
 
@@ -779,7 +768,6 @@ class="category">
 🍽️ Plats
 </h2>
 
-
 <div class="products">
 
 
@@ -787,8 +775,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
-alt="Plat">
+src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -808,10 +795,7 @@ Un délicieux plat préparé avec des ingrédients frais.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Plat du Jour',
-25
-)">
+onclick="addToCart('Plat du Jour',25)">
 
 Ajouter
 
@@ -828,8 +812,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
-alt="Pizza">
+src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -849,10 +832,7 @@ Pizza préparée avec des ingrédients de qualité.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Pizza',
-22
-)">
+onclick="addToCart('Pizza',22)">
 
 Ajouter
 
@@ -863,7 +843,6 @@ Ajouter
 </div>
 
 </div>
-
 
 </div>
 
@@ -880,7 +859,6 @@ class="category">
 🍰 Desserts
 </h2>
 
-
 <div class="products">
 
 
@@ -888,8 +866,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
-alt="Gâteau">
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -909,10 +886,7 @@ Délicieux gâteau au chocolat.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Gâteau au Chocolat',
-9
-)">
+onclick="addToCart('Gâteau au Chocolat',9)">
 
 Ajouter
 
@@ -929,8 +903,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
-alt="Dessert">
+src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -950,10 +923,7 @@ Une douceur préparée avec soin.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Dessert Maison',
-8
-)">
+onclick="addToCart('Dessert Maison',8)">
 
 Ajouter
 
@@ -964,7 +934,6 @@ Ajouter
 </div>
 
 </div>
-
 
 </div>
 
@@ -981,7 +950,6 @@ class="category">
 🥤 Boissons
 </h2>
 
-
 <div class="products">
 
 
@@ -989,8 +957,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"
-alt="Boisson">
+src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1010,10 +977,7 @@ Boisson fraîche au choix.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Boisson Fraîche',
-5
-)">
+onclick="addToCart('Boisson Fraîche',5)">
 
 Ajouter
 
@@ -1030,8 +994,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80"
-alt="Jus">
+src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1051,10 +1014,7 @@ Jus de fruits frais.
 
 <button
 class="add-button"
-onclick="addToCart(
-'Jus Frais',
-7
-)">
+onclick="addToCart('Jus Frais',7)">
 
 Ajouter
 
@@ -1066,7 +1026,6 @@ Ajouter
 
 </div>
 
-
 </div>
 
 </section>
@@ -1075,7 +1034,7 @@ Ajouter
 </main>
 
 
-<!-- ================= CART BUTTON ================= -->
+<!-- ================= CART ICON ================= -->
 
 <button
 class="cart-button"
@@ -1100,7 +1059,6 @@ id="cartCount">
 class="cart-overlay"
 id="cartOverlay"
 onclick="closeCart()">
-
 </div>
 
 
@@ -1157,18 +1115,75 @@ Total
 </div>
 
 
-<div class="order-form">
+<!-- ================= CUSTOMER NAME ================= -->
 
 <input
+class="customer-input"
 type="text"
 id="customerName"
 placeholder="Votre nom">
 
 
-<input
-type="number"
-id="tableNumber"
-placeholder="Numéro de table">
+<!-- ================= TABLE SELECTION ================= -->
+
+<label
+class="table-label"
+for="tableNumber">
+
+🪑 Choisissez votre table
+
+</label>
+
+
+<select
+class="table-select"
+id="tableNumber">
+
+<option value="">
+Sélectionnez votre table
+</option>
+
+<option value="1">
+Table 1
+</option>
+
+<option value="2">
+Table 2
+</option>
+
+<option value="3">
+Table 3
+</option>
+
+<option value="4">
+Table 4
+</option>
+
+<option value="5">
+Table 5
+</option>
+
+<option value="6">
+Table 6
+</option>
+
+<option value="7">
+Table 7
+</option>
+
+<option value="8">
+Table 8
+</option>
+
+<option value="9">
+Table 9
+</option>
+
+<option value="10">
+Table 10
+</option>
+
+</select>
 
 
 <button
@@ -1179,8 +1194,6 @@ onclick="sendOrder()">
 Envoyer la commande
 
 </button>
-
-</div>
 
 
 </div>
@@ -1239,7 +1252,6 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 /* ================= FIREBASE CONFIG ================= */
 
-
 const firebaseConfig = {
 
     apiKey:
@@ -1264,9 +1276,7 @@ const firebaseConfig = {
 
 
 const app =
-initializeApp(
-firebaseConfig
-);
+initializeApp(firebaseConfig);
 
 
 const db =
@@ -1275,35 +1285,24 @@ getFirestore(app);
 
 /* ================= CART ================= */
 
-
 let cart = [];
-
-
-/* ADD TO CART */
 
 
 window.addToCart =
 function(
-
     name,
-
     price
-
 ) {
 
 
     const existing =
     cart.find(
-
         item =>
         item.name === name
-
     );
 
 
-    if (
-    existing
-    ) {
+    if (existing) {
 
         existing.quantity++;
 
@@ -1329,47 +1328,41 @@ function(
 
     updateCart();
 
-
-    openCart();
-
 };
 
 
-/* UPDATE CART */
-
+/* ================= UPDATE CART ================= */
 
 function updateCart() {
 
 
     const cartItems =
-    document
-    .getElementById(
-    "cartItems"
+    document.getElementById(
+        "cartItems"
     );
 
 
     const cartCount =
-    document
-    .getElementById(
-    "cartCount"
+    document.getElementById(
+        "cartCount"
     );
 
 
     const cartTotal =
-    document
-    .getElementById(
-    "cartTotal"
+    document.getElementById(
+        "cartTotal"
     );
 
 
-    cartItems.innerHTML =
-    "";
+    cartItems.innerHTML = "";
 
 
-    if (
-    cart.length === 0
-    ) {
+    let total = 0;
 
+    let count = 0;
+
+
+    if (cart.length === 0) {
 
         cartItems.innerHTML = `
 
@@ -1381,21 +1374,14 @@ function updateCart() {
 
         `;
 
-
     }
 
 
-    let total =
-    0;
-
-
-    let count =
-    0;
-
-
     cart.forEach(
-
-        function(item, index) {
+        function(
+            item,
+            index
+        ) {
 
 
             total +=
@@ -1408,9 +1394,8 @@ function updateCart() {
 
 
             const div =
-            document
-            .createElement(
-            "div"
+            document.createElement(
+                "div"
             );
 
 
@@ -1420,7 +1405,7 @@ function updateCart() {
 
             div.innerHTML = `
 
-            <div class="cart-item-info">
+            <div>
 
                 <div class="cart-item-name">
 
@@ -1430,8 +1415,7 @@ function updateCart() {
 
                 <div class="cart-item-price">
 
-                ${item.price}
-                TND
+                ${item.price} TND
 
                 </div>
 
@@ -1441,10 +1425,7 @@ function updateCart() {
             <div class="quantity-controls">
 
                 <button
-                onclick="changeQuantity(
-                ${index},
-                -1
-                )">
+                onclick="changeQuantity(${index},-1)">
 
                 −
 
@@ -1459,10 +1440,7 @@ function updateCart() {
 
 
                 <button
-                onclick="changeQuantity(
-                ${index},
-                1
-                )">
+                onclick="changeQuantity(${index},1)">
 
                 +
 
@@ -1474,11 +1452,10 @@ function updateCart() {
 
 
             cartItems.appendChild(
-            div
+                div
             );
 
         }
-
     );
 
 
@@ -1493,16 +1470,12 @@ function updateCart() {
 }
 
 
-/* CHANGE QUANTITY */
-
+/* ================= CHANGE QUANTITY ================= */
 
 window.changeQuantity =
 function(
-
     index,
-
     change
-
 ) {
 
 
@@ -1511,12 +1484,12 @@ function(
 
 
     if (
-    cart[index].quantity <= 0
+        cart[index].quantity <= 0
     ) {
 
         cart.splice(
-        index,
-        1
+            index,
+            1
         );
 
     }
@@ -1529,28 +1502,27 @@ function(
 
 /* ================= OPEN CART ================= */
 
-
 window.openCart =
 function() {
 
 
     document
     .getElementById(
-    "cart"
+        "cart"
     )
     .classList
     .add(
-    "active"
+        "active"
     );
 
 
     document
     .getElementById(
-    "cartOverlay"
+        "cartOverlay"
     )
     .classList
     .add(
-    "active"
+        "active"
     );
 
 };
@@ -1558,28 +1530,27 @@ function() {
 
 /* ================= CLOSE CART ================= */
 
-
 window.closeCart =
 function() {
 
 
     document
     .getElementById(
-    "cart"
+        "cart"
     )
     .classList
     .remove(
-    "active"
+        "active"
     );
 
 
     document
     .getElementById(
-    "cartOverlay"
+        "cartOverlay"
     )
     .classList
     .remove(
-    "active"
+        "active"
     );
 
 };
@@ -1587,17 +1558,16 @@ function() {
 
 /* ================= SEND ORDER ================= */
 
-
 window.sendOrder =
 async function() {
 
 
     if (
-    cart.length === 0
+        cart.length === 0
     ) {
 
         alert(
-        "Votre panier est vide."
+            "Votre panier est vide."
         );
 
         return;
@@ -1608,7 +1578,7 @@ async function() {
     const customerName =
     document
     .getElementById(
-    "customerName"
+        "customerName"
     )
     .value
     .trim();
@@ -1617,18 +1587,15 @@ async function() {
     const tableNumber =
     document
     .getElementById(
-    "tableNumber"
+        "tableNumber"
     )
-    .value
-    .trim();
+    .value;
 
 
-    if (
-    !customerName
-    ) {
+    if (!customerName) {
 
         alert(
-        "Veuillez entrer votre nom."
+            "Veuillez entrer votre nom."
         );
 
         return;
@@ -1636,12 +1603,10 @@ async function() {
     }
 
 
-    if (
-    !tableNumber
-    ) {
+    if (!tableNumber) {
 
         alert(
-        "Veuillez entrer votre numéro de table."
+            "Veuillez choisir votre table."
         );
 
         return;
@@ -1652,7 +1617,7 @@ async function() {
     const orderButton =
     document
     .getElementById(
-    "orderButton"
+        "orderButton"
     );
 
 
@@ -1666,19 +1631,19 @@ async function() {
 
     const total =
     cart.reduce(
-
-        function(sum, item) {
+        function(
+            sum,
+            item
+        ) {
 
             return sum +
             (
-            item.price *
-            item.quantity
+                item.price *
+                item.quantity
             );
 
         },
-
         0
-
     );
 
 
@@ -1688,8 +1653,8 @@ async function() {
         await addDoc(
 
             collection(
-            db,
-            "orders"
+                db,
+                "orders"
             ),
 
             {
@@ -1725,7 +1690,7 @@ async function() {
 
         document
         .getElementById(
-        "customerName"
+            "customerName"
         )
         .value =
         "";
@@ -1733,7 +1698,7 @@ async function() {
 
         document
         .getElementById(
-        "tableNumber"
+            "tableNumber"
         )
         .value =
         "";
@@ -1744,7 +1709,7 @@ async function() {
 
         document
         .getElementById(
-        "successMessage"
+            "successMessage"
         )
         .style
         .display =
@@ -1758,18 +1723,15 @@ async function() {
 
 
         console.error(
-        error
+            error
         );
 
 
         alert(
-
-        "Erreur lors de l'envoi: "
-        +
-        error.message
-
+            "Erreur lors de l'envoi : "
+            +
+            error.message
         );
-
 
     }
 
@@ -1791,14 +1753,13 @@ async function() {
 
 /* ================= CLOSE SUCCESS ================= */
 
-
 window.closeSuccess =
 function() {
 
 
     document
     .getElementById(
-    "successMessage"
+        "successMessage"
     )
     .style
     .display =
