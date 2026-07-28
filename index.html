@@ -1743,3 +1743,71 @@ async function() {
 
 
         document
+        .getElementById(
+        "successMessage"
+        )
+        .style
+        .display =
+        "flex";
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+        error
+        );
+
+
+        alert(
+
+        "Erreur lors de l'envoi: "
+        +
+        error.message
+
+        );
+
+
+    }
+
+
+    finally {
+
+
+        orderButton.disabled =
+        false;
+
+
+        orderButton.textContent =
+        "Envoyer la commande";
+
+    }
+
+};
+
+
+/* ================= CLOSE SUCCESS ================= */
+
+
+window.closeSuccess =
+function() {
+
+
+    document
+    .getElementById(
+    "successMessage"
+    )
+    .style
+    .display =
+    "none";
+
+};
+
+
+</script>
+
+</body>
+</html>
