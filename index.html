@@ -3,7 +3,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bayouta Park - Menu</title>
@@ -51,7 +50,7 @@ header {
 }
 
 
-/* ================= CATEGORY NAV ================= */
+/* ================= CATEGORY NAVIGATION ================= */
 
 .menu-nav {
     position: sticky;
@@ -94,6 +93,83 @@ header {
     font-weight: bold;
 }
 
+.menu-nav a:hover {
+    background: #d6b77c;
+}
+
+
+/* ================= TABLE SECTION ================= */
+
+.table-section {
+    max-width: 600px;
+
+    margin: 20px auto;
+
+    padding: 0 15px;
+}
+
+
+/* ================= DETECTED TABLE ================= */
+
+.detected-table {
+    display: none;
+
+    background: white;
+
+    border: 2px solid #d6b77c;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    box-shadow:
+    0 3px 10px
+    rgba(0,0,0,0.08);
+}
+
+
+/* ================= MANUAL TABLE ================= */
+
+.manual-table {
+    display: none;
+
+    background: white;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    box-shadow:
+    0 3px 10px
+    rgba(0,0,0,0.08);
+}
+
+.manual-table label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.manual-table select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    font-size: 16px;
+
+    background: white;
+}
+
 
 /* ================= MENU ================= */
 
@@ -125,10 +201,7 @@ header {
     grid-template-columns:
     repeat(
         auto-fit,
-        minmax(
-            220px,
-            1fr
-        )
+        minmax(220px, 1fr)
     );
 
     gap: 20px;
@@ -146,12 +219,7 @@ header {
 
     box-shadow:
     0 4px 15px
-    rgba(
-        0,
-        0,
-        0,
-        0.08
-    );
+    rgba(0,0,0,0.08);
 }
 
 .product-image {
@@ -216,6 +284,10 @@ header {
     font-weight: bold;
 }
 
+.add-button:hover {
+    background: #4a4038;
+}
+
 
 /* ================= CART BUTTON ================= */
 
@@ -246,12 +318,7 @@ header {
 
     box-shadow:
     0 5px 20px
-    rgba(
-        0,
-        0,
-        0,
-        0.3
-    );
+    rgba(0,0,0,0.3);
 }
 
 .cart-count {
@@ -293,12 +360,7 @@ header {
     inset: 0;
 
     background:
-    rgba(
-        0,
-        0,
-        0,
-        0.5
-    );
+    rgba(0,0,0,0.5);
 
     z-index: 3000;
 }
@@ -467,7 +529,7 @@ header {
 }
 
 
-/* ================= CUSTOMER ================= */
+/* ================= CUSTOMER NAME ================= */
 
 .customer-input {
     width: 100%;
@@ -482,68 +544,6 @@ header {
     font-size: 15px;
 
     margin-bottom: 12px;
-}
-
-
-/* ================= DETECTED TABLE ================= */
-
-.detected-table {
-    display: none;
-
-    background: #f5f0e8;
-
-    border:
-    2px solid #d6b77c;
-
-    padding: 13px;
-
-    border-radius: 8px;
-
-    margin-bottom: 12px;
-
-    font-weight: bold;
-
-    text-align: center;
-}
-
-.detected-table.show {
-    display: block;
-}
-
-
-/* ================= MANUAL TABLE ================= */
-
-.manual-table {
-    display: none;
-
-    margin-bottom: 12px;
-}
-
-.manual-table.show {
-    display: block;
-}
-
-.table-label {
-    display: block;
-
-    font-weight: bold;
-
-    margin-bottom: 7px;
-}
-
-.table-select {
-    width: 100%;
-
-    padding: 13px;
-
-    border:
-    1px solid #ddd;
-
-    border-radius: 7px;
-
-    background: white;
-
-    font-size: 15px;
 }
 
 
@@ -571,6 +571,8 @@ header {
 
 .order-button:disabled {
     background: #999;
+
+    cursor: not-allowed;
 }
 
 
@@ -586,12 +588,7 @@ header {
     z-index: 5000;
 
     background:
-    rgba(
-        0,
-        0,
-        0,
-        0.6
-    );
+    rgba(0,0,0,0.6);
 
     align-items: center;
 
@@ -724,6 +721,92 @@ header {
 </nav>
 
 
+<!-- ================================================= -->
+<!-- TABLE DETECTOR - VISIBLE ON PAGE -->
+<!-- ================================================= -->
+
+<div class="table-section">
+
+
+    <!-- Shows when URL contains ?table=5 -->
+
+    <div
+    id="detectedTable"
+    class="detected-table">
+
+    </div>
+
+
+    <!-- Shows when there is no table in URL -->
+
+    <div
+    id="manualTable"
+    class="manual-table">
+
+
+        <label for="tableNumber">
+
+            🪑 Choisissez votre table
+
+        </label>
+
+
+        <select
+        id="tableNumber">
+
+            <option value="">
+
+                Sélectionnez votre table
+
+            </option>
+
+            <option value="1">
+                Table 1
+            </option>
+
+            <option value="2">
+                Table 2
+            </option>
+
+            <option value="3">
+                Table 3
+            </option>
+
+            <option value="4">
+                Table 4
+            </option>
+
+            <option value="5">
+                Table 5
+            </option>
+
+            <option value="6">
+                Table 6
+            </option>
+
+            <option value="7">
+                Table 7
+            </option>
+
+            <option value="8">
+                Table 8
+            </option>
+
+            <option value="9">
+                Table 9
+            </option>
+
+            <option value="10">
+                Table 10
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
 <!-- ================= MENU ================= -->
 
 <main class="menu-container">
@@ -746,7 +829,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+alt="Salade">
 
 <div class="product-content">
 
@@ -783,7 +867,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80"
+alt="Bruschetta">
 
 <div class="product-content">
 
@@ -815,6 +900,7 @@ Ajouter
 
 </div>
 
+
 </div>
 
 </section>
@@ -837,7 +923,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+alt="Plat">
 
 <div class="product-content">
 
@@ -874,7 +961,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+alt="Pizza">
 
 <div class="product-content">
 
@@ -906,6 +994,7 @@ Ajouter
 
 </div>
 
+
 </div>
 
 </section>
@@ -928,7 +1017,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+alt="Gâteau">
 
 <div class="product-content">
 
@@ -965,7 +1055,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
+alt="Dessert">
 
 <div class="product-content">
 
@@ -997,6 +1088,7 @@ Ajouter
 
 </div>
 
+
 </div>
 
 </section>
@@ -1019,7 +1111,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"
+alt="Boisson">
 
 <div class="product-content">
 
@@ -1056,7 +1149,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80"
+alt="Jus">
 
 <div class="product-content">
 
@@ -1088,6 +1182,7 @@ Ajouter
 
 </div>
 
+
 </div>
 
 </section>
@@ -1100,7 +1195,8 @@ Ajouter
 
 <button
 class="cart-button"
-onclick="openCart()">
+onclick="openCart()"
+aria-label="Ouvrir le panier">
 
 🛒
 
@@ -1149,6 +1245,8 @@ onclick="closeCart()">
 </div>
 
 
+<!-- CART ITEMS -->
+
 <div
 class="cart-items"
 id="cartItems">
@@ -1161,6 +1259,8 @@ Votre panier est vide.
 
 </div>
 
+
+<!-- CART FOOTER -->
 
 <div class="cart-footer">
 
@@ -1178,83 +1278,13 @@ Total
 </div>
 
 
+<!-- CUSTOMER NAME IS NOW OPTIONAL -->
 
-
-<!-- TABLE DETECTED AUTOMATICALLY -->
-
-<div
-id="detectedTable"
-class="detected-table">
-
-</div>
-
-
-<!-- MANUAL TABLE IF NO QR TABLE -->
-
-<div
-id="manualTable"
-class="manual-table">
-
-
-<label
-class="table-label">
-
-🪑 Choisissez votre table
-
-</label>
-
-
-<select
-id="tableNumber"
-class="table-select">
-
-<option value="">
-Sélectionnez votre table
-</option>
-
-<option value="1">
-Table 1
-</option>
-
-<option value="2">
-Table 2
-</option>
-
-<option value="3">
-Table 3
-</option>
-
-<option value="4">
-Table 4
-</option>
-
-<option value="5">
-Table 5
-</option>
-
-<option value="6">
-Table 6
-</option>
-
-<option value="7">
-Table 7
-</option>
-
-<option value="8">
-Table 8
-</option>
-
-<option value="9">
-Table 9
-</option>
-
-<option value="10">
-Table 10
-</option>
-
-</select>
-
-</div>
+<input
+class="customer-input"
+type="text"
+id="customerName"
+placeholder="Votre nom (optionnel)">
 
 
 <button
@@ -1302,22 +1332,10 @@ Fermer
 
 
 <!-- ================================================= -->
-<!-- TABLE DETECTION - NORMAL JAVASCRIPT               -->
+<!-- TABLE DETECTION -->
 <!-- ================================================= -->
 
 <script>
-
-/*
-    TABLE DETECTION
-
-    Example:
-
-    Your website:
-    https://username.github.io/repository/
-
-    Table 5:
-    https://username.github.io/repository/?table=5
-*/
 
 
 let detectedTableNumber = null;
@@ -1325,14 +1343,15 @@ let detectedTableNumber = null;
 
 function detectTable() {
 
-    const currentURL =
-    new URL(
-        window.location.href
+
+    const params =
+    new URLSearchParams(
+        window.location.search
     );
 
 
     const table =
-    currentURL.searchParams.get(
+    params.get(
         "table"
     );
 
@@ -1350,24 +1369,20 @@ function detectTable() {
 
 
     /*
-        Check if table exists
+    ==============================================
+    TABLE DETECTED FROM QR CODE
+    ==============================================
     */
 
 
     if (
-        table !== null &&
-        table !== "" &&
+        table &&
         /^[0-9]+$/.test(table)
     ) {
 
 
         detectedTableNumber =
         table;
-
-
-        /*
-            Show detected table
-        */
 
 
         detectedTable.innerHTML =
@@ -1381,28 +1396,23 @@ function detectTable() {
         "</strong>";
 
 
-        detectedTable.classList.add(
-            "show"
-        );
+        detectedTable.style.display =
+        "block";
 
 
-        /*
-            Hide manual selector
-        */
-
-
-        manualTable.classList.remove(
-            "show"
-        );
-
-
-        console.log(
-            "TABLE DETECTED:",
-            table
-        );
+        manualTable.style.display =
+        "none";
 
 
     }
+
+
+    /*
+    ==============================================
+    NO TABLE DETECTED
+    ==============================================
+    */
+
 
     else {
 
@@ -1411,40 +1421,17 @@ function detectTable() {
         null;
 
 
-        /*
-            Hide detected table
-        */
+        detectedTable.style.display =
+        "none";
 
 
-        detectedTable.classList.remove(
-            "show"
-        );
-
-
-        /*
-            Show manual selector
-        */
-
-
-        manualTable.classList.add(
-            "show"
-        );
-
-
-        console.log(
-            "NO TABLE DETECTED"
-        );
+        manualTable.style.display =
+        "block";
 
 
     }
 
 }
-
-
-/*
-    Run detector
-    when page loads
-*/
 
 
 document.addEventListener(
@@ -1456,11 +1443,12 @@ document.addEventListener(
     }
 );
 
+
 </script>
 
 
 <!-- ================================================= -->
-<!-- CART JAVASCRIPT                                   -->
+<!-- CART JAVASCRIPT -->
 <!-- ================================================= -->
 
 <script>
@@ -1489,13 +1477,11 @@ function addToCart(
         existingItem
     ) {
 
-
         existingItem.quantity++;
 
     }
 
     else {
-
 
         cart.push({
 
@@ -1663,6 +1649,7 @@ function updateCart() {
     total +
     " TND";
 
+
 }
 
 
@@ -1754,16 +1741,14 @@ function closeCart() {
 }
 
 
-/* ================= INITIAL CART ================= */
-
-
 updateCart();
+
 
 </script>
 
 
 <!-- ================================================= -->
-<!-- FIREBASE                                          -->
+<!-- FIREBASE -->
 <!-- ================================================= -->
 
 <script type="module">
@@ -1830,7 +1815,7 @@ async function() {
 
 
     /*
-        Check cart
+    CHECK CART
     */
 
 
@@ -1850,7 +1835,11 @@ async function() {
 
 
     /*
-        Get customer name
+    CUSTOMER NAME IS OPTIONAL
+
+    If empty, Firebase receives:
+    ""
+
     */
 
 
@@ -1864,13 +1853,11 @@ async function() {
 
 
     /*
-        Get table
+    GET TABLE
 
-        Priority:
+    QR detected table has priority.
 
-        1. QR detected table
-
-        2. Manual selection
+    Otherwise use manual selection.
     */
 
 
@@ -1890,12 +1877,13 @@ async function() {
         )
         .value;
 
-
     }
 
 
     /*
-        Validate table
+    CHECK TABLE
+
+    Table is still REQUIRED.
     */
 
 
@@ -1905,7 +1893,7 @@ async function() {
 
 
         alert(
-            "Table non détectée. Veuillez sélectionner votre table."
+            "Veuillez choisir votre table."
         );
 
 
@@ -1915,7 +1903,7 @@ async function() {
 
 
     /*
-        Disable button
+    DISABLE BUTTON
     */
 
 
@@ -1934,7 +1922,7 @@ async function() {
 
 
     /*
-        Calculate total
+    CALCULATE TOTAL
     */
 
 
@@ -1964,7 +1952,7 @@ async function() {
 
 
         /*
-            Send order to Firebase
+        SEND ORDER TO FIREBASE
         */
 
 
@@ -1976,6 +1964,10 @@ async function() {
             ),
 
             {
+
+                /*
+                Customer name can be empty
+                */
 
                 customerName:
                 customerName,
@@ -2001,7 +1993,7 @@ async function() {
 
 
         /*
-            Clear cart
+        CLEAR CART
         */
 
 
@@ -2012,7 +2004,7 @@ async function() {
 
 
         /*
-            Clear customer
+        CLEAR CUSTOMER NAME
         */
 
 
@@ -2025,7 +2017,7 @@ async function() {
 
 
         /*
-            Close cart
+        CLOSE CART
         */
 
 
@@ -2033,7 +2025,7 @@ async function() {
 
 
         /*
-            Show success
+        SHOW SUCCESS
         */
 
 
@@ -2048,6 +2040,7 @@ async function() {
 
     }
 
+
     catch (
         error
     ) {
@@ -2059,7 +2052,7 @@ async function() {
 
 
         alert(
-            "Erreur : " +
+            "Erreur lors de l'envoi : " +
             error.message
         );
 
