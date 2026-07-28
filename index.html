@@ -4,12 +4,9 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bayouta Park - Menu</title>
-
 
 <style>
 
@@ -95,10 +92,6 @@ header {
     border-radius: 25px;
 
     font-weight: bold;
-}
-
-.menu-nav a:hover {
-    background: #d6b77c;
 }
 
 
@@ -223,12 +216,8 @@ header {
     font-weight: bold;
 }
 
-.add-button:hover {
-    background: #4a4038;
-}
 
-
-/* ================= CART ICON ================= */
+/* ================= CART BUTTON ================= */
 
 .cart-button {
     position: fixed;
@@ -297,7 +286,6 @@ header {
 /* ================= CART OVERLAY ================= */
 
 .cart-overlay {
-
     display: none;
 
     position: fixed;
@@ -313,20 +301,16 @@ header {
     );
 
     z-index: 3000;
-
 }
 
 .cart-overlay.active {
-
     display: block;
-
 }
 
 
 /* ================= CART ================= */
 
 .cart {
-
     position: fixed;
 
     top: 0;
@@ -347,32 +331,26 @@ header {
     translateX(100%);
 
     transition:
-    transform
-    0.3s
-    ease;
+    transform 0.3s ease;
 
     display: flex;
 
     flex-direction: column;
 
     visibility: hidden;
-
 }
 
 .cart.active {
-
     transform:
     translateX(0);
 
     visibility: visible;
-
 }
 
 
 /* ================= CART HEADER ================= */
 
 .cart-header {
-
     background: #2b2520;
 
     color: white;
@@ -384,11 +362,9 @@ header {
     align-items: center;
 
     justify-content: space-between;
-
 }
 
 .close-cart {
-
     background: none;
 
     border: none;
@@ -398,34 +374,28 @@ header {
     font-size: 28px;
 
     cursor: pointer;
-
 }
 
 
 /* ================= CART ITEMS ================= */
 
 .cart-items {
-
     flex: 1;
 
     overflow-y: auto;
 
     padding: 15px;
-
 }
 
 .empty-cart {
-
     text-align: center;
 
     color: #777;
 
     padding: 40px 10px;
-
 }
 
 .cart-item {
-
     display: flex;
 
     align-items: center;
@@ -438,35 +408,27 @@ header {
 
     border-bottom:
     1px solid #eee;
-
 }
 
 .cart-item-name {
-
     font-weight: bold;
-
 }
 
 .cart-item-price {
-
     color: #777;
 
     margin-top: 5px;
-
 }
 
 .quantity-controls {
-
     display: flex;
 
     align-items: center;
 
     gap: 8px;
-
 }
 
 .quantity-controls button {
-
     width: 30px;
 
     height: 30px;
@@ -480,23 +442,19 @@ header {
     cursor: pointer;
 
     font-size: 18px;
-
 }
 
 
 /* ================= CART FOOTER ================= */
 
 .cart-footer {
-
     padding: 20px;
 
     border-top:
     1px solid #ddd;
-
 }
 
 .cart-total {
-
     display: flex;
 
     justify-content: space-between;
@@ -506,14 +464,12 @@ header {
     font-weight: bold;
 
     margin-bottom: 18px;
-
 }
 
 
 /* ================= CUSTOMER ================= */
 
 .customer-input {
-
     width: 100%;
 
     padding: 13px;
@@ -526,14 +482,12 @@ header {
     font-size: 15px;
 
     margin-bottom: 12px;
-
 }
 
 
-/* ================= TABLE DETECTED ================= */
+/* ================= DETECTED TABLE ================= */
 
 .detected-table {
-
     display: none;
 
     background: #f5f0e8;
@@ -541,7 +495,7 @@ header {
     border:
     2px solid #d6b77c;
 
-    padding: 12px;
+    padding: 13px;
 
     border-radius: 8px;
 
@@ -550,42 +504,34 @@ header {
     font-weight: bold;
 
     text-align: center;
-
 }
 
 .detected-table.show {
-
     display: block;
-
 }
 
 
 /* ================= MANUAL TABLE ================= */
 
 .manual-table {
-
     display: none;
 
+    margin-bottom: 12px;
 }
 
 .manual-table.show {
-
     display: block;
-
 }
 
 .table-label {
-
     display: block;
 
     font-weight: bold;
 
     margin-bottom: 7px;
-
 }
 
 .table-select {
-
     width: 100%;
 
     padding: 13px;
@@ -598,16 +544,12 @@ header {
     background: white;
 
     font-size: 15px;
-
-    margin-bottom: 12px;
-
 }
 
 
 /* ================= ORDER BUTTON ================= */
 
 .order-button {
-
     width: 100%;
 
     padding: 14px;
@@ -625,22 +567,16 @@ header {
     font-weight: bold;
 
     cursor: pointer;
-
 }
 
 .order-button:disabled {
-
     background: #999;
-
-    cursor: not-allowed;
-
 }
 
 
 /* ================= SUCCESS ================= */
 
 .success-message {
-
     display: none;
 
     position: fixed;
@@ -662,11 +598,9 @@ header {
     justify-content: center;
 
     padding: 20px;
-
 }
 
 .success-box {
-
     background: white;
 
     padding: 30px;
@@ -678,25 +612,19 @@ header {
     width: 100%;
 
     max-width: 400px;
-
 }
 
 .success-box h2 {
-
     margin-bottom: 15px;
-
 }
 
 .success-box p {
-
     color: #666;
 
     margin-bottom: 20px;
-
 }
 
 .success-box button {
-
     background: #2b2520;
 
     color: white;
@@ -708,7 +636,6 @@ header {
     border-radius: 7px;
 
     cursor: pointer;
-
 }
 
 
@@ -717,50 +644,36 @@ header {
 @media (max-width: 600px) {
 
     .products {
-
         grid-template-columns:
         1fr 1fr;
 
         gap: 12px;
-
     }
 
     .product-image {
-
         height: 130px;
-
     }
 
     .product-content {
-
         padding: 10px;
-
     }
 
     .product-name {
-
         font-size: 15px;
-
     }
 
     .product-description {
-
         font-size: 12px;
-
     }
 
     .product-bottom {
-
         flex-direction: column;
 
         align-items: stretch;
-
     }
 
     .add-button {
-
         width: 100%;
-
     }
 
 }
@@ -833,8 +746,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
-alt="Salade">
+src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -871,8 +783,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80"
-alt="Bruschetta">
+src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -926,8 +837,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
-alt="Plat">
+src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -964,8 +874,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
-alt="Pizza">
+src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1019,8 +928,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
-alt="Gâteau">
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1057,8 +965,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
-alt="Dessert">
+src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1112,8 +1019,7 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"
-alt="Boisson">
+src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1150,8 +1056,7 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80"
-alt="Jus">
+src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80">
 
 <div class="product-content">
 
@@ -1191,12 +1096,11 @@ Ajouter
 </main>
 
 
-<!-- ================= CART ICON ================= -->
+<!-- ================= CART BUTTON ================= -->
 
 <button
 class="cart-button"
-onclick="openCart()"
-aria-label="Ouvrir le panier">
+onclick="openCart()">
 
 🛒
 
@@ -1225,8 +1129,7 @@ onclick="closeCart()">
 
 <div
 class="cart"
-id="cart"
-aria-hidden="true">
+id="cart">
 
 
 <div class="cart-header">
@@ -1262,8 +1165,6 @@ Votre panier est vide.
 <div class="cart-footer">
 
 
-<!-- TOTAL -->
-
 <div class="cart-total">
 
 <span>
@@ -1277,8 +1178,6 @@ Total
 </div>
 
 
-<!-- CUSTOMER NAME -->
-
 <input
 class="customer-input"
 type="text"
@@ -1286,24 +1185,24 @@ id="customerName"
 placeholder="Votre nom">
 
 
-<!-- AUTOMATIC TABLE -->
+<!-- TABLE DETECTED AUTOMATICALLY -->
 
 <div
-class="detected-table"
-id="detectedTable">
+id="detectedTable"
+class="detected-table">
 
 </div>
 
 
-<!-- MANUAL TABLE -->
+<!-- MANUAL TABLE IF NO QR TABLE -->
 
 <div
-class="manual-table"
-id="manualTable">
+id="manualTable"
+class="manual-table">
+
 
 <label
-class="table-label"
-for="tableNumber">
+class="table-label">
 
 🪑 Choisissez votre table
 
@@ -1311,8 +1210,8 @@ for="tableNumber">
 
 
 <select
-class="table-select"
-id="tableNumber">
+id="tableNumber"
+class="table-select">
 
 <option value="">
 Sélectionnez votre table
@@ -1363,8 +1262,6 @@ Table 10
 </div>
 
 
-<!-- SEND ORDER -->
-
 <button
 class="order-button"
 id="orderButton"
@@ -1380,7 +1277,7 @@ Envoyer la commande
 </div>
 
 
-<!-- ================= SUCCESS MESSAGE ================= -->
+<!-- ================= SUCCESS ================= -->
 
 <div
 class="success-message"
@@ -1409,7 +1306,470 @@ Fermer
 </div>
 
 
-<!-- ================= FIREBASE ================= -->
+<!-- ================================================= -->
+<!-- TABLE DETECTION - NORMAL JAVASCRIPT               -->
+<!-- ================================================= -->
+
+<script>
+
+/*
+    TABLE DETECTION
+
+    Example:
+
+    Your website:
+    https://username.github.io/repository/
+
+    Table 5:
+    https://username.github.io/repository/?table=5
+*/
+
+
+let detectedTableNumber = null;
+
+
+function detectTable() {
+
+    const currentURL =
+    new URL(
+        window.location.href
+    );
+
+
+    const table =
+    currentURL.searchParams.get(
+        "table"
+    );
+
+
+    const detectedTable =
+    document.getElementById(
+        "detectedTable"
+    );
+
+
+    const manualTable =
+    document.getElementById(
+        "manualTable"
+    );
+
+
+    /*
+        Check if table exists
+    */
+
+
+    if (
+        table !== null &&
+        table !== "" &&
+        /^[0-9]+$/.test(table)
+    ) {
+
+
+        detectedTableNumber =
+        table;
+
+
+        /*
+            Show detected table
+        */
+
+
+        detectedTable.innerHTML =
+
+        "🪑 Votre table : " +
+
+        "<strong>Table " +
+
+        table +
+
+        "</strong>";
+
+
+        detectedTable.classList.add(
+            "show"
+        );
+
+
+        /*
+            Hide manual selector
+        */
+
+
+        manualTable.classList.remove(
+            "show"
+        );
+
+
+        console.log(
+            "TABLE DETECTED:",
+            table
+        );
+
+
+    }
+
+    else {
+
+
+        detectedTableNumber =
+        null;
+
+
+        /*
+            Hide detected table
+        */
+
+
+        detectedTable.classList.remove(
+            "show"
+        );
+
+
+        /*
+            Show manual selector
+        */
+
+
+        manualTable.classList.add(
+            "show"
+        );
+
+
+        console.log(
+            "NO TABLE DETECTED"
+        );
+
+
+    }
+
+}
+
+
+/*
+    Run detector
+    when page loads
+*/
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        detectTable();
+
+    }
+);
+
+</script>
+
+
+<!-- ================================================= -->
+<!-- CART JAVASCRIPT                                   -->
+<!-- ================================================= -->
+
+<script>
+
+
+let cart = [];
+
+
+/* ================= ADD TO CART ================= */
+
+
+function addToCart(
+    name,
+    price
+) {
+
+
+    const existingItem =
+    cart.find(
+        item =>
+        item.name === name
+    );
+
+
+    if (
+        existingItem
+    ) {
+
+
+        existingItem.quantity++;
+
+    }
+
+    else {
+
+
+        cart.push({
+
+            name:
+            name,
+
+            price:
+            price,
+
+            quantity:
+            1
+
+        });
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* ================= UPDATE CART ================= */
+
+
+function updateCart() {
+
+
+    const cartItems =
+    document.getElementById(
+        "cartItems"
+    );
+
+
+    const cartCount =
+    document.getElementById(
+        "cartCount"
+    );
+
+
+    const cartTotal =
+    document.getElementById(
+        "cartTotal"
+    );
+
+
+    cartItems.innerHTML =
+    "";
+
+
+    let total =
+    0;
+
+
+    let count =
+    0;
+
+
+    if (
+        cart.length === 0
+    ) {
+
+
+        cartItems.innerHTML = `
+
+        <div class="empty-cart">
+
+        Votre panier est vide.
+
+        </div>
+
+        `;
+
+    }
+
+
+    cart.forEach(
+        function(
+            item,
+            index
+        ) {
+
+
+            total +=
+            item.price *
+            item.quantity;
+
+
+            count +=
+            item.quantity;
+
+
+            const div =
+            document.createElement(
+                "div"
+            );
+
+
+            div.className =
+            "cart-item";
+
+
+            div.innerHTML = `
+
+            <div>
+
+                <div class="cart-item-name">
+
+                    ${item.name}
+
+                </div>
+
+                <div class="cart-item-price">
+
+                    ${item.price} TND
+
+                </div>
+
+            </div>
+
+
+            <div class="quantity-controls">
+
+                <button
+                onclick="changeQuantity(${index}, -1)">
+
+                    −
+
+                </button>
+
+
+                <span>
+
+                    ${item.quantity}
+
+                </span>
+
+
+                <button
+                onclick="changeQuantity(${index}, 1)">
+
+                    +
+
+                </button>
+
+            </div>
+
+            `;
+
+
+            cartItems.appendChild(
+                div
+            );
+
+
+        }
+    );
+
+
+    cartCount.textContent =
+    count;
+
+
+    cartTotal.textContent =
+    total +
+    " TND";
+
+}
+
+
+/* ================= CHANGE QUANTITY ================= */
+
+
+function changeQuantity(
+    index,
+    change
+) {
+
+
+    cart[index].quantity +=
+    change;
+
+
+    if (
+        cart[index].quantity <= 0
+    ) {
+
+
+        cart.splice(
+            index,
+            1
+        );
+
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* ================= OPEN CART ================= */
+
+
+function openCart() {
+
+
+    document
+    .getElementById(
+        "cart"
+    )
+    .classList
+    .add(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "cartOverlay"
+    )
+    .classList
+    .add(
+        "active"
+    );
+
+}
+
+
+/* ================= CLOSE CART ================= */
+
+
+function closeCart() {
+
+
+    document
+    .getElementById(
+        "cart"
+    )
+    .classList
+    .remove(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "cartOverlay"
+    )
+    .classList
+    .remove(
+        "active"
+    );
+
+}
+
+
+/* ================= INITIAL CART ================= */
+
+
+updateCart();
+
+</script>
+
+
+<!-- ================================================= -->
+<!-- FIREBASE                                          -->
+<!-- ================================================= -->
 
 <script type="module">
 
@@ -1467,427 +1827,16 @@ getFirestore(
 );
 
 
-/* ================= CART ================= */
-
-
-let cart = [];
-
-
-/* ================= TABLE DETECTION ================= */
-
-
-/*
-Example QR code:
-
-https://yourwebsite.com/?table=5
-
-The system automatically detects:
-Table 5
-*/
-
-
-const urlParams =
-new URLSearchParams(
-    window.location.search
-);
-
-
-const detectedTable =
-urlParams.get(
-    "table"
-);
-
-
-const detectedTableBox =
-document.getElementById(
-    "detectedTable"
-);
-
-
-const manualTableBox =
-document.getElementById(
-    "manualTable"
-);
-
-
-const tableSelect =
-document.getElementById(
-    "tableNumber"
-);
-
-
-if (
-    detectedTable
-) {
-
-
-    detectedTableBox.textContent =
-    "🪑 Votre table : Table "
-    +
-    detectedTable;
-
-
-    detectedTableBox.classList.add(
-        "show"
-    );
-
-
-    /*
-    Hide manual table selection
-    because the QR code already
-    identifies the table.
-    */
-
-
-    manualTableBox.classList.remove(
-        "show"
-    );
-
-
-}
-
-
-else {
-
-
-    /*
-    No table in URL.
-    Show manual selection.
-    */
-
-
-    manualTableBox.classList.add(
-        "show"
-    );
-
-}
-
-
-/* ================= ADD TO CART ================= */
-
-
-window.addToCart =
-function(
-    name,
-    price
-) {
-
-
-    const existing =
-    cart.find(
-        item =>
-        item.name === name
-    );
-
-
-    if (
-        existing
-    ) {
-
-
-        existing.quantity++;
-
-
-    }
-
-
-    else {
-
-
-        cart.push({
-
-            name:
-            name,
-
-            price:
-            price,
-
-            quantity:
-            1
-
-        });
-
-
-    }
-
-
-    updateCart();
-
-};
-
-
-/* ================= UPDATE CART ================= */
-
-
-function updateCart() {
-
-
-    const cartItems =
-    document.getElementById(
-        "cartItems"
-    );
-
-
-    const cartCount =
-    document.getElementById(
-        "cartCount"
-    );
-
-
-    const cartTotal =
-    document.getElementById(
-        "cartTotal"
-    );
-
-
-    cartItems.innerHTML =
-    "";
-
-
-    let total =
-    0;
-
-
-    let count =
-    0;
-
-
-    if (
-        cart.length === 0
-    ) {
-
-
-        cartItems.innerHTML = `
-
-        <div class="empty-cart">
-
-        Votre panier est vide.
-
-        </div>
-
-        `;
-
-
-    }
-
-
-    cart.forEach(
-        function(
-            item,
-            index
-        ) {
-
-
-            total +=
-            item.price *
-            item.quantity;
-
-
-            count +=
-            item.quantity;
-
-
-            const div =
-            document.createElement(
-                "div"
-            );
-
-
-            div.className =
-            "cart-item";
-
-
-            div.innerHTML = `
-
-            <div>
-
-                <div class="cart-item-name">
-
-                ${item.name}
-
-                </div>
-
-                <div class="cart-item-price">
-
-                ${item.price} TND
-
-                </div>
-
-            </div>
-
-
-            <div class="quantity-controls">
-
-                <button
-                onclick="changeQuantity(${index}, -1)">
-
-                −
-
-                </button>
-
-
-                <span>
-
-                ${item.quantity}
-
-                </span>
-
-
-                <button
-                onclick="changeQuantity(${index}, 1)">
-
-                +
-
-                </button>
-
-            </div>
-
-            `;
-
-
-            cartItems.appendChild(
-                div
-            );
-
-
-        }
-    );
-
-
-    cartCount.textContent =
-    count;
-
-
-    cartTotal.textContent =
-    total
-    +
-    " TND";
-
-
-}
-
-
-/* ================= CHANGE QUANTITY ================= */
-
-
-window.changeQuantity =
-function(
-    index,
-    change
-) {
-
-
-    cart[index].quantity +=
-    change;
-
-
-    if (
-        cart[index].quantity <= 0
-    ) {
-
-
-        cart.splice(
-            index,
-            1
-        );
-
-
-    }
-
-
-    updateCart();
-
-
-};
-
-
-/* ================= OPEN CART ================= */
-
-
-window.openCart =
-function() {
-
-
-    /*
-    Cart is ONLY made visible
-    when this function is called.
-    */
-
-
-    const cartElement =
-    document.getElementById(
-        "cart"
-    );
-
-
-    const overlay =
-    document.getElementById(
-        "cartOverlay"
-    );
-
-
-    cartElement.classList.add(
-        "active"
-    );
-
-
-    overlay.classList.add(
-        "active"
-    );
-
-
-    cartElement.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-};
-
-
-/* ================= CLOSE CART ================= */
-
-
-window.closeCart =
-function() {
-
-
-    const cartElement =
-    document.getElementById(
-        "cart"
-    );
-
-
-    const overlay =
-    document.getElementById(
-        "cartOverlay"
-    );
-
-
-    cartElement.classList.remove(
-        "active"
-    );
-
-
-    overlay.classList.remove(
-        "active"
-    );
-
-
-    cartElement.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-
-};
-
-
 /* ================= SEND ORDER ================= */
 
 
 window.sendOrder =
 async function() {
+
+
+    /*
+        Check cart
+    */
 
 
     if (
@@ -1902,8 +1851,12 @@ async function() {
 
         return;
 
-
     }
+
+
+    /*
+        Get customer name
+    */
 
 
     const customerName =
@@ -1916,16 +1869,18 @@ async function() {
 
 
     /*
-    If QR detected a table,
-    use it.
+        Get table
 
-    Otherwise use manual
-    table selection.
+        Priority:
+
+        1. QR detected table
+
+        2. Manual selection
     */
 
 
     let tableNumber =
-    detectedTable;
+    detectedTableNumber;
 
 
     if (
@@ -1934,10 +1889,19 @@ async function() {
 
 
         tableNumber =
-        tableSelect.value;
+        document
+        .getElementById(
+            "tableNumber"
+        )
+        .value;
 
 
     }
+
+
+    /*
+        Validate customer
+    */
 
 
     if (
@@ -1952,8 +1916,12 @@ async function() {
 
         return;
 
-
     }
+
+
+    /*
+        Validate table
+    */
 
 
     if (
@@ -1962,14 +1930,18 @@ async function() {
 
 
         alert(
-            "Veuillez choisir votre table."
+            "Table non détectée. Veuillez sélectionner votre table."
         );
 
 
         return;
 
-
     }
+
+
+    /*
+        Disable button
+    */
 
 
     const orderButton =
@@ -1986,6 +1958,11 @@ async function() {
     "Envoi en cours...";
 
 
+    /*
+        Calculate total
+    */
+
+
     const total =
     cart.reduce(
         function(
@@ -1994,11 +1971,11 @@ async function() {
         ) {
 
 
-            return sum
-            +
+            return sum +
+
             (
-                item.price
-                *
+                item.price *
+
                 item.quantity
             );
 
@@ -2011,6 +1988,11 @@ async function() {
     try {
 
 
+        /*
+            Send order to Firebase
+        */
+
+
         await addDoc(
 
             collection(
@@ -2020,37 +2002,23 @@ async function() {
 
             {
 
-
                 customerName:
                 customerName,
-
 
                 tableNumber:
                 tableNumber,
 
-
                 items:
                 cart,
-
 
                 total:
                 total,
 
-
-                /*
-                Reception page
-                should display this
-                as a NEW order.
-                */
-
-
                 status:
                 "new",
 
-
                 createdAt:
                 serverTimestamp()
-
 
             }
 
@@ -2058,7 +2026,7 @@ async function() {
 
 
         /*
-        Clear cart
+            Clear cart
         */
 
 
@@ -2069,7 +2037,7 @@ async function() {
 
 
         /*
-        Clear customer name
+            Clear customer
         */
 
 
@@ -2082,25 +2050,7 @@ async function() {
 
 
         /*
-        Only clear manual
-        table selection.
-        */
-
-
-        if (
-            !detectedTable
-        ) {
-
-
-            tableSelect.value =
-            "";
-
-
-        }
-
-
-        /*
-        Close cart
+            Close cart
         */
 
 
@@ -2108,7 +2058,7 @@ async function() {
 
 
         /*
-        Show success
+            Show success
         */
 
 
@@ -2123,8 +2073,9 @@ async function() {
 
     }
 
-
-    catch(error) {
+    catch (
+        error
+    ) {
 
 
         console.error(
@@ -2133,8 +2084,7 @@ async function() {
 
 
         alert(
-            "Erreur lors de l'envoi : "
-            +
+            "Erreur : " +
             error.message
         );
 
@@ -2155,7 +2105,6 @@ async function() {
 
     }
 
-
 };
 
 
@@ -2174,18 +2123,12 @@ function() {
     .display =
     "none";
 
-
 };
-
-
-/* ================= INITIAL CART ================= */
-
-
-updateCart();
 
 
 </script>
 
 
 </body>
+
 </html>
