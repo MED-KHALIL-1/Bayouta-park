@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Bayouta Park - Menu</title>
 
+
 <style>
+
+/* ================= GENERAL ================= */
 
 * {
     box-sizing: border-box;
@@ -16,7 +23,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 130px;
+    scroll-padding-top: 125px;
 }
 
 body {
@@ -24,6 +31,7 @@ body {
     background: #f5f0e8;
     color: #2b2520;
 }
+
 
 /* ================= HEADER ================= */
 
@@ -44,6 +52,7 @@ header {
     margin-top: 7px;
     opacity: 0.8;
 }
+
 
 /* ================= CATEGORY NAV ================= */
 
@@ -92,6 +101,7 @@ header {
     background: #d6b77c;
 }
 
+
 /* ================= MENU ================= */
 
 .menu-container {
@@ -130,6 +140,7 @@ header {
 
     gap: 20px;
 }
+
 
 /* ================= PRODUCT ================= */
 
@@ -212,6 +223,11 @@ header {
     font-weight: bold;
 }
 
+.add-button:hover {
+    background: #4a4038;
+}
+
+
 /* ================= CART ICON ================= */
 
 .cart-button {
@@ -277,9 +293,11 @@ header {
     font-weight: bold;
 }
 
-/* ================= CART ================= */
+
+/* ================= CART OVERLAY ================= */
 
 .cart-overlay {
+
     display: none;
 
     position: fixed;
@@ -295,13 +313,20 @@ header {
     );
 
     z-index: 3000;
+
 }
 
 .cart-overlay.active {
+
     display: block;
+
 }
 
+
+/* ================= CART ================= */
+
 .cart {
+
     position: fixed;
 
     top: 0;
@@ -323,19 +348,31 @@ header {
 
     transition:
     transform
-    0.3s;
+    0.3s
+    ease;
 
     display: flex;
 
     flex-direction: column;
+
+    visibility: hidden;
+
 }
 
 .cart.active {
+
     transform:
     translateX(0);
+
+    visibility: visible;
+
 }
 
+
+/* ================= CART HEADER ================= */
+
 .cart-header {
+
     background: #2b2520;
 
     color: white;
@@ -347,9 +384,11 @@ header {
     align-items: center;
 
     justify-content: space-between;
+
 }
 
 .close-cart {
+
     background: none;
 
     border: none;
@@ -359,25 +398,34 @@ header {
     font-size: 28px;
 
     cursor: pointer;
+
 }
 
+
+/* ================= CART ITEMS ================= */
+
 .cart-items {
+
     flex: 1;
 
     overflow-y: auto;
 
     padding: 15px;
+
 }
 
 .empty-cart {
+
     text-align: center;
 
     color: #777;
 
     padding: 40px 10px;
+
 }
 
 .cart-item {
+
     display: flex;
 
     align-items: center;
@@ -388,28 +436,37 @@ header {
 
     padding: 15px 0;
 
-    border-bottom: 1px solid #eee;
+    border-bottom:
+    1px solid #eee;
+
 }
 
 .cart-item-name {
+
     font-weight: bold;
+
 }
 
 .cart-item-price {
+
     color: #777;
 
     margin-top: 5px;
+
 }
 
 .quantity-controls {
+
     display: flex;
 
     align-items: center;
 
     gap: 8px;
+
 }
 
 .quantity-controls button {
+
     width: 30px;
 
     height: 30px;
@@ -423,17 +480,23 @@ header {
     cursor: pointer;
 
     font-size: 18px;
+
 }
+
 
 /* ================= CART FOOTER ================= */
 
 .cart-footer {
+
     padding: 20px;
 
-    border-top: 1px solid #ddd;
+    border-top:
+    1px solid #ddd;
+
 }
 
 .cart-total {
+
     display: flex;
 
     justify-content: space-between;
@@ -443,19 +506,86 @@ header {
     font-weight: bold;
 
     margin-bottom: 18px;
+
 }
 
-/* ================= TABLE SELECTION ================= */
+
+/* ================= CUSTOMER ================= */
+
+.customer-input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+    1px solid #ddd;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+
+}
+
+
+/* ================= TABLE DETECTED ================= */
+
+.detected-table {
+
+    display: none;
+
+    background: #f5f0e8;
+
+    border:
+    2px solid #d6b77c;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 12px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+}
+
+.detected-table.show {
+
+    display: block;
+
+}
+
+
+/* ================= MANUAL TABLE ================= */
+
+.manual-table {
+
+    display: none;
+
+}
+
+.manual-table.show {
+
+    display: block;
+
+}
 
 .table-label {
+
     display: block;
 
     font-weight: bold;
 
     margin-bottom: 7px;
+
 }
 
 .table-select {
+
     width: 100%;
 
     padding: 13px;
@@ -470,28 +600,14 @@ header {
     font-size: 15px;
 
     margin-bottom: 12px;
+
 }
 
-/* ================= CUSTOMER ================= */
-
-.customer-input {
-    width: 100%;
-
-    padding: 13px;
-
-    border:
-    1px solid #ddd;
-
-    border-radius: 7px;
-
-    font-size: 15px;
-
-    margin-bottom: 12px;
-}
 
 /* ================= ORDER BUTTON ================= */
 
 .order-button {
+
     width: 100%;
 
     padding: 14px;
@@ -509,15 +625,22 @@ header {
     font-weight: bold;
 
     cursor: pointer;
+
 }
 
 .order-button:disabled {
+
     background: #999;
+
+    cursor: not-allowed;
+
 }
+
 
 /* ================= SUCCESS ================= */
 
 .success-message {
+
     display: none;
 
     position: fixed;
@@ -539,9 +662,11 @@ header {
     justify-content: center;
 
     padding: 20px;
+
 }
 
 .success-box {
+
     background: white;
 
     padding: 30px;
@@ -553,19 +678,25 @@ header {
     width: 100%;
 
     max-width: 400px;
+
 }
 
 .success-box h2 {
+
     margin-bottom: 15px;
+
 }
 
 .success-box p {
+
     color: #666;
 
     margin-bottom: 20px;
+
 }
 
 .success-box button {
+
     background: #2b2520;
 
     color: white;
@@ -577,47 +708,65 @@ header {
     border-radius: 7px;
 
     cursor: pointer;
+
 }
+
 
 /* ================= MOBILE ================= */
 
 @media (max-width: 600px) {
 
     .products {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+        1fr 1fr;
 
         gap: 12px;
+
     }
 
     .product-image {
+
         height: 130px;
+
     }
 
     .product-content {
+
         padding: 10px;
+
     }
 
     .product-name {
+
         font-size: 15px;
+
     }
 
     .product-description {
+
         font-size: 12px;
+
     }
 
     .product-bottom {
+
         flex-direction: column;
 
         align-items: stretch;
+
     }
 
     .add-button {
+
         width: 100%;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -684,7 +833,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+alt="Salade">
 
 <div class="product-content">
 
@@ -721,7 +871,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=800&q=80"
+alt="Bruschetta">
 
 <div class="product-content">
 
@@ -775,7 +926,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+alt="Plat">
 
 <div class="product-content">
 
@@ -812,7 +964,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+alt="Pizza">
 
 <div class="product-content">
 
@@ -866,7 +1019,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+alt="Gâteau">
 
 <div class="product-content">
 
@@ -903,7 +1057,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
+alt="Dessert">
 
 <div class="product-content">
 
@@ -957,7 +1112,8 @@ class="category">
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"
+alt="Boisson">
 
 <div class="product-content">
 
@@ -994,7 +1150,8 @@ Ajouter
 
 <img
 class="product-image"
-src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80">
+src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80"
+alt="Jus">
 
 <div class="product-content">
 
@@ -1038,7 +1195,8 @@ Ajouter
 
 <button
 class="cart-button"
-onclick="openCart()">
+onclick="openCart()"
+aria-label="Ouvrir le panier">
 
 🛒
 
@@ -1059,6 +1217,7 @@ id="cartCount">
 class="cart-overlay"
 id="cartOverlay"
 onclick="closeCart()">
+
 </div>
 
 
@@ -1066,7 +1225,8 @@ onclick="closeCart()">
 
 <div
 class="cart"
-id="cart">
+id="cart"
+aria-hidden="true">
 
 
 <div class="cart-header">
@@ -1102,6 +1262,8 @@ Votre panier est vide.
 <div class="cart-footer">
 
 
+<!-- TOTAL -->
+
 <div class="cart-total">
 
 <span>
@@ -1115,7 +1277,7 @@ Total
 </div>
 
 
-<!-- ================= CUSTOMER NAME ================= -->
+<!-- CUSTOMER NAME -->
 
 <input
 class="customer-input"
@@ -1124,7 +1286,20 @@ id="customerName"
 placeholder="Votre nom">
 
 
-<!-- ================= TABLE SELECTION ================= -->
+<!-- AUTOMATIC TABLE -->
+
+<div
+class="detected-table"
+id="detectedTable">
+
+</div>
+
+
+<!-- MANUAL TABLE -->
+
+<div
+class="manual-table"
+id="manualTable">
 
 <label
 class="table-label"
@@ -1185,6 +1360,10 @@ Table 10
 
 </select>
 
+</div>
+
+
+<!-- SEND ORDER -->
 
 <button
 class="order-button"
@@ -1201,7 +1380,7 @@ Envoyer la commande
 </div>
 
 
-<!-- ================= SUCCESS ================= -->
+<!-- ================= SUCCESS MESSAGE ================= -->
 
 <div
 class="success-message"
@@ -1252,6 +1431,7 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 /* ================= FIREBASE CONFIG ================= */
 
+
 const firebaseConfig = {
 
     apiKey:
@@ -1276,16 +1456,114 @@ const firebaseConfig = {
 
 
 const app =
-initializeApp(firebaseConfig);
+initializeApp(
+    firebaseConfig
+);
 
 
 const db =
-getFirestore(app);
+getFirestore(
+    app
+);
 
 
 /* ================= CART ================= */
 
+
 let cart = [];
+
+
+/* ================= TABLE DETECTION ================= */
+
+
+/*
+Example QR code:
+
+https://yourwebsite.com/?table=5
+
+The system automatically detects:
+Table 5
+*/
+
+
+const urlParams =
+new URLSearchParams(
+    window.location.search
+);
+
+
+const detectedTable =
+urlParams.get(
+    "table"
+);
+
+
+const detectedTableBox =
+document.getElementById(
+    "detectedTable"
+);
+
+
+const manualTableBox =
+document.getElementById(
+    "manualTable"
+);
+
+
+const tableSelect =
+document.getElementById(
+    "tableNumber"
+);
+
+
+if (
+    detectedTable
+) {
+
+
+    detectedTableBox.textContent =
+    "🪑 Votre table : Table "
+    +
+    detectedTable;
+
+
+    detectedTableBox.classList.add(
+        "show"
+    );
+
+
+    /*
+    Hide manual table selection
+    because the QR code already
+    identifies the table.
+    */
+
+
+    manualTableBox.classList.remove(
+        "show"
+    );
+
+
+}
+
+
+else {
+
+
+    /*
+    No table in URL.
+    Show manual selection.
+    */
+
+
+    manualTableBox.classList.add(
+        "show"
+    );
+
+}
+
+
+/* ================= ADD TO CART ================= */
 
 
 window.addToCart =
@@ -1302,13 +1580,19 @@ function(
     );
 
 
-    if (existing) {
+    if (
+        existing
+    ) {
+
 
         existing.quantity++;
 
+
     }
 
+
     else {
+
 
         cart.push({
 
@@ -1323,6 +1607,7 @@ function(
 
         });
 
+
     }
 
 
@@ -1332,6 +1617,7 @@ function(
 
 
 /* ================= UPDATE CART ================= */
+
 
 function updateCart() {
 
@@ -1354,15 +1640,22 @@ function updateCart() {
     );
 
 
-    cartItems.innerHTML = "";
+    cartItems.innerHTML =
+    "";
 
 
-    let total = 0;
+    let total =
+    0;
 
-    let count = 0;
+
+    let count =
+    0;
 
 
-    if (cart.length === 0) {
+    if (
+        cart.length === 0
+    ) {
+
 
         cartItems.innerHTML = `
 
@@ -1373,6 +1666,7 @@ function updateCart() {
         </div>
 
         `;
+
 
     }
 
@@ -1425,7 +1719,7 @@ function updateCart() {
             <div class="quantity-controls">
 
                 <button
-                onclick="changeQuantity(${index},-1)">
+                onclick="changeQuantity(${index}, -1)">
 
                 −
 
@@ -1440,7 +1734,7 @@ function updateCart() {
 
 
                 <button
-                onclick="changeQuantity(${index},1)">
+                onclick="changeQuantity(${index}, 1)">
 
                 +
 
@@ -1455,6 +1749,7 @@ function updateCart() {
                 div
             );
 
+
         }
     );
 
@@ -1464,13 +1759,16 @@ function updateCart() {
 
 
     cartTotal.textContent =
-    total +
+    total
+    +
     " TND";
+
 
 }
 
 
 /* ================= CHANGE QUANTITY ================= */
+
 
 window.changeQuantity =
 function(
@@ -1487,76 +1785,106 @@ function(
         cart[index].quantity <= 0
     ) {
 
+
         cart.splice(
             index,
             1
         );
+
 
     }
 
 
     updateCart();
 
+
 };
 
 
 /* ================= OPEN CART ================= */
 
+
 window.openCart =
 function() {
 
 
-    document
-    .getElementById(
+    /*
+    Cart is ONLY made visible
+    when this function is called.
+    */
+
+
+    const cartElement =
+    document.getElementById(
         "cart"
-    )
-    .classList
-    .add(
-        "active"
     );
 
 
-    document
-    .getElementById(
+    const overlay =
+    document.getElementById(
         "cartOverlay"
-    )
-    .classList
-    .add(
+    );
+
+
+    cartElement.classList.add(
         "active"
     );
+
+
+    overlay.classList.add(
+        "active"
+    );
+
+
+    cartElement.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
 
 };
 
 
 /* ================= CLOSE CART ================= */
 
+
 window.closeCart =
 function() {
 
 
-    document
-    .getElementById(
+    const cartElement =
+    document.getElementById(
         "cart"
-    )
-    .classList
-    .remove(
-        "active"
     );
 
 
-    document
-    .getElementById(
+    const overlay =
+    document.getElementById(
         "cartOverlay"
-    )
-    .classList
-    .remove(
+    );
+
+
+    cartElement.classList.remove(
         "active"
     );
+
+
+    overlay.classList.remove(
+        "active"
+    );
+
+
+    cartElement.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
 
 };
 
 
 /* ================= SEND ORDER ================= */
+
 
 window.sendOrder =
 async function() {
@@ -1566,11 +1894,14 @@ async function() {
         cart.length === 0
     ) {
 
+
         alert(
             "Votre panier est vide."
         );
 
+
         return;
+
 
     }
 
@@ -1584,39 +1915,65 @@ async function() {
     .trim();
 
 
-    const tableNumber =
-    document
-    .getElementById(
-        "tableNumber"
-    )
-    .value;
+    /*
+    If QR detected a table,
+    use it.
+
+    Otherwise use manual
+    table selection.
+    */
 
 
-    if (!customerName) {
+    let tableNumber =
+    detectedTable;
+
+
+    if (
+        !tableNumber
+    ) {
+
+
+        tableNumber =
+        tableSelect.value;
+
+
+    }
+
+
+    if (
+        !customerName
+    ) {
+
 
         alert(
             "Veuillez entrer votre nom."
         );
 
+
         return;
+
 
     }
 
 
-    if (!tableNumber) {
+    if (
+        !tableNumber
+    ) {
+
 
         alert(
             "Veuillez choisir votre table."
         );
 
+
         return;
+
 
     }
 
 
     const orderButton =
-    document
-    .getElementById(
+    document.getElementById(
         "orderButton"
     );
 
@@ -1636,11 +1993,15 @@ async function() {
             item
         ) {
 
-            return sum +
+
+            return sum
+            +
             (
-                item.price *
+                item.price
+                *
                 item.quantity
             );
+
 
         },
         0
@@ -1659,33 +2020,57 @@ async function() {
 
             {
 
+
                 customerName:
                 customerName,
+
 
                 tableNumber:
                 tableNumber,
 
+
                 items:
                 cart,
+
 
                 total:
                 total,
 
+
+                /*
+                Reception page
+                should display this
+                as a NEW order.
+                */
+
+
                 status:
                 "new",
 
+
                 createdAt:
                 serverTimestamp()
+
 
             }
 
         );
 
 
+        /*
+        Clear cart
+        */
+
+
         cart = [];
 
 
         updateCart();
+
+
+        /*
+        Clear customer name
+        */
 
 
         document
@@ -1696,15 +2081,35 @@ async function() {
         "";
 
 
-        document
-        .getElementById(
-            "tableNumber"
-        )
-        .value =
-        "";
+        /*
+        Only clear manual
+        table selection.
+        */
+
+
+        if (
+            !detectedTable
+        ) {
+
+
+            tableSelect.value =
+            "";
+
+
+        }
+
+
+        /*
+        Close cart
+        */
 
 
         closeCart();
+
+
+        /*
+        Show success
+        */
 
 
         document
@@ -1733,6 +2138,7 @@ async function() {
             error.message
         );
 
+
     }
 
 
@@ -1746,12 +2152,15 @@ async function() {
         orderButton.textContent =
         "Envoyer la commande";
 
+
     }
+
 
 };
 
 
 /* ================= CLOSE SUCCESS ================= */
+
 
 window.closeSuccess =
 function() {
@@ -1765,10 +2174,18 @@ function() {
     .display =
     "none";
 
+
 };
 
 
+/* ================= INITIAL CART ================= */
+
+
+updateCart();
+
+
 </script>
+
 
 </body>
 </html>
