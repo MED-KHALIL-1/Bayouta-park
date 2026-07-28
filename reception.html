@@ -79,6 +79,1108 @@ body {
     cursor: pointer;
 }
 
+.login-error {
+    display: none;
+    background: #ffebee;
+    color: #c62828;
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* DASHBOARD */
+
+#dashboard {
+    display: none;
+}
+
+header {
+    background: #2b2520;
+    color: #f5f0e8;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+.logout-button {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    background: #b33a2b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.status-bar {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.connection {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.orders-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 15px 50px;
+}
+
+.section-title {
+    margin: 25px 0 15px;
+}
+
+/* STATUS SECTIONS */
+
+.status-section {
+    margin-bottom: 35px;
+}
+
+.status-title {
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.order-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.new-card {
+    border-left: 5px solid #d6b77c;
+}
+
+.preparing-card {
+    border-left: 5px solid #2196f3;
+}
+
+.done-card {
+    border-left: 5px solid #2e7d32;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.order-number {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.table {
+    background: #d6b77c;
+    color: #2b2520;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.customer {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.order-time {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.items {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.accept {
+    background: #2196f3;
+    color: white;
+    flex: 1;
+}
+
+.delivered {
+    background: #2e7d32;
+    color: white;
+    flex: 1;
+}
+
+.no-orders {
+    text-align: center;
+    background: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    color: #777;
+}
+
+@media (max-width: 500px) {
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .logout-button {
+        position: static;
+        margin-top: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+<div class="login-box">
+
+<h1>BAYOUTA PARK</h1>
+
+<p>Connexion Réception</p>
+
+<div class="login-error" id="loginError">
+Email ou mot de passe incorrect.
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="Votre email"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Mot de passe</label>
+
+<input
+type="password"
+id="password"
+placeholder="Votre mot de passe"
+>
+
+</div>
+
+<button
+class="login-button"
+id="loginButton"
+onclick="login()"
+>
+
+Se connecter
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<header>
+
+<div class="logo">
+BAYOUTA PARK
+</div>
+
+<div class="subtitle">
+Tableau de réception
+</div>
+
+<button
+class="logout-button"
+onclick="logout()"
+>
+Déconnexion
+</button>
+
+</header>
+
+
+<div class="status-bar">
+
+<div
+class="connection"
+id="connection"
+>
+Connexion...
+</div>
+
+</div>
+
+
+<main class="orders-container">
+
+<h2 class="section-title">
+Gestion des commandes
+</h2>
+
+
+<!-- NEW ORDERS -->
+
+<div class="status-section">
+
+<div class="status-title">
+🆕 Nouvelles commandes
+</div>
+
+<div id="newOrders">
+
+<div class="no-orders">
+Aucune nouvelle commande
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PREPARING ORDERS -->
+
+<div class="status-section">
+
+<div class="status-title">
+🔵 En préparation
+</div>
+
+<div id="preparingOrders">
+
+<div class="no-orders">
+Aucune commande en préparation
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DONE ORDERS -->
+
+<div class="status-section">
+
+<div class="status-title">
+🟢 Commandes prêtes
+</div>
+
+<div id="doneOrders">
+
+<div class="no-orders">
+Aucune commande prête
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    onSnapshot,
+    doc,
+    updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyAbG_ateon42nWNrlK0QnyTHNwyxGop2ow",
+
+    authDomain:
+    "restaurant-ordering-syst-915da.firebaseapp.com",
+
+    projectId:
+    "restaurant-ordering-syst-915da",
+
+    storageBucket:
+    "restaurant-ordering-syst-915da.firebasestorage.app",
+
+    messagingSenderId:
+    "129974228020",
+
+    appId:
+    "1:129974228020:web:bfe09a72dee9f73c152661"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+
+const auth =
+getAuth(app);
+
+
+const db =
+getFirestore(app);
+
+
+let unsubscribeOrders = null;
+
+
+/* LOGIN */
+
+window.login =
+async function() {
+
+    const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
+
+
+    const password =
+    document
+    .getElementById("password")
+    .value;
+
+
+    const error =
+    document
+    .getElementById("loginError");
+
+
+    const button =
+    document
+    .getElementById("loginButton");
+
+
+    if (!email || !password) {
+
+        error.textContent =
+        "Veuillez entrer votre email et votre mot de passe.";
+
+        error.style.display =
+        "block";
+
+        return;
+
+    }
+
+
+    button.disabled =
+    true;
+
+    button.textContent =
+    "Connexion...";
+
+
+    error.style.display =
+    "none";
+
+
+    try {
+
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+    }
+
+    catch(errorObject) {
+
+        console.error(
+        errorObject
+        );
+
+
+        error.textContent =
+        "Email ou mot de passe incorrect.";
+
+        error.style.display =
+        "block";
+
+
+        button.disabled =
+        false;
+
+        button.textContent =
+        "Se connecter";
+
+    }
+
+};
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(
+
+    auth,
+
+    (user) => {
+
+        if (user) {
+
+            document
+            .getElementById("loginPage")
+            .style
+            .display =
+            "none";
+
+
+            document
+            .getElementById("dashboard")
+            .style
+            .display =
+            "block";
+
+
+            loadOrders();
+
+        }
+
+        else {
+
+            document
+            .getElementById("loginPage")
+            .style
+            .display =
+            "flex";
+
+
+            document
+            .getElementById("dashboard")
+            .style
+            .display =
+            "none";
+
+
+            if (unsubscribeOrders) {
+
+                unsubscribeOrders();
+
+                unsubscribeOrders =
+                null;
+
+            }
+
+        }
+
+    }
+
+);
+
+
+/* LOGOUT */
+
+window.logout =
+async function() {
+
+    await signOut(auth);
+
+};
+
+
+/* LOAD ALL ACTIVE ORDERS */
+
+function loadOrders() {
+
+    const connection =
+    document
+    .getElementById("connection");
+
+
+    const ordersQuery =
+    query(
+
+        collection(
+        db,
+        "orders"
+        ),
+
+        where(
+        "status",
+        "in",
+        [
+            "new",
+            "preparing",
+            "done"
+        ]
+
+        )
+
+    );
+
+
+    unsubscribeOrders =
+    onSnapshot(
+
+        ordersQuery,
+
+        (snapshot) => {
+
+            connection.textContent =
+            "🟢 Connecté — Commandes en direct";
+
+
+            const newContainer =
+            document
+            .getElementById("newOrders");
+
+
+            const preparingContainer =
+            document
+            .getElementById("preparingOrders");
+
+
+            const doneContainer =
+            document
+            .getElementById("doneOrders");
+
+
+            newContainer.innerHTML =
+            "";
+
+
+            preparingContainer.innerHTML =
+            "";
+
+
+            doneContainer.innerHTML =
+            "";
+
+
+            let newCount =
+            0;
+
+
+            let preparingCount =
+            0;
+
+
+            let doneCount =
+            0;
+
+
+            snapshot.forEach(
+
+                (orderDoc) => {
+
+                    const order =
+                    orderDoc.data();
+
+
+                    const card =
+                    createOrderCard(
+
+                        orderDoc.id,
+
+                        order
+
+                    );
+
+
+                    if (
+                    order.status === "new"
+                    ) {
+
+                        newContainer
+                        .appendChild(card);
+
+                        newCount++;
+
+                    }
+
+
+                    if (
+                    order.status === "preparing"
+                    ) {
+
+                        preparingContainer
+                        .appendChild(card);
+
+                        preparingCount++;
+
+                    }
+
+
+                    if (
+                    order.status === "done"
+                    ) {
+
+                        doneContainer
+                        .appendChild(card);
+
+                        doneCount++;
+
+                    }
+
+                }
+
+            );
+
+
+            if (newCount === 0) {
+
+                newContainer.innerHTML =
+                `<div class="no-orders">
+                Aucune nouvelle commande
+                </div>`;
+
+            }
+
+
+            if (preparingCount === 0) {
+
+                preparingContainer.innerHTML =
+                `<div class="no-orders">
+                Aucune commande en préparation
+                </div>`;
+
+            }
+
+
+            if (doneCount === 0) {
+
+                doneContainer.innerHTML =
+                `<div class="no-orders">
+                Aucune commande prête
+                </div>`;
+
+            }
+
+        },
+
+
+        (error) => {
+
+            console.error(
+            error
+            );
+
+
+            connection.textContent =
+            "🔴 Erreur de connexion aux commandes";
+
+        }
+
+    );
+
+}
+
+
+/* CREATE ORDER CARD */
+
+function createOrderCard(
+
+    orderId,
+
+    order
+
+) {
+
+    const card =
+    document
+    .createElement("div");
+
+
+    card.className =
+    "order-card";
+
+
+    if (
+    order.status === "new"
+    ) {
+
+        card.classList.add(
+        "new-card"
+        );
+
+    }
+
+
+    if (
+    order.status === "preparing"
+    ) {
+
+        card.classList.add(
+        "preparing-card"
+        );
+
+    }
+
+
+    if (
+    order.status === "done"
+    ) {
+
+        card.classList.add(
+        "done-card"
+        );
+
+    }
+
+
+    let itemsHTML =
+    "";
+
+
+    order.items.forEach(
+
+        (item) => {
+
+            itemsHTML += `
+
+            <div class="item">
+
+            <span>
+            ${item.quantity} × ${item.name}
+            </span>
+
+            <span>
+            ${item.price * item.quantity} TND
+            </span>
+
+            </div>
+
+            `;
+
+        }
+
+    );
+
+
+    let timeText =
+    "Heure inconnue";
+
+
+    if (order.createdAt) {
+
+        timeText =
+        order.createdAt
+        .toDate()
+        .toLocaleString("fr-FR");
+
+    }
+
+
+    const shortId =
+    orderId
+    .substring(0,6)
+    .toUpperCase();
+
+
+    let buttonHTML =
+    "";
+
+
+    /* NEW ORDER */
+
+    if (
+    order.status === "new"
+    ) {
+
+        buttonHTML = `
+
+        <button
+        class="accept"
+        onclick="changeOrderStatus(
+        '${orderId}',
+        'preparing'
+        )"
+        >
+
+        ✓ Accepter — En préparation
+
+        </button>
+
+        `;
+
+    }
+
+
+    /* DONE ORDER */
+
+    if (
+    order.status === "done"
+    ) {
+
+        buttonHTML = `
+
+        <button
+        class="delivered"
+        onclick="changeOrderStatus(
+        '${orderId}',
+        'delivered'
+        )"
+        >
+
+        ✓ Livrée — Faire disparaître
+
+        </button>
+
+        `;
+
+    }
+
+
+    card.innerHTML = `
+
+    <div class="order-header">
+
+    <div class="order-number">
+
+    Commande #${shortId}
+
+    </div>
+
+
+    <div class="table">
+
+    🪑 Table ${order.tableNumber}
+
+    </div>
+
+    </div>
+
+
+    <div class="customer">
+
+    👤 ${order.customerName || "Client"}
+
+    </div>
+
+
+    <div class="order-time">
+
+    🕐 ${timeText}
+
+    </div>
+
+
+    <div class="items">
+
+    ${itemsHTML}
+
+    </div>
+
+
+    <div class="total">
+
+    <span>Total</span>
+
+    <span>${order.total} TND</span>
+
+    </div>
+
+
+    <div class="buttons">
+
+    ${buttonHTML}
+
+    </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* CHANGE STATUS */
+
+window.changeOrderStatus =
+async function(
+
+    orderId,
+
+    newStatus
+
+) {
+
+    try {
+
+        await updateDoc(
+
+            doc(
+
+                db,
+
+                "orders",
+
+                orderId
+
+            ),
+
+            {
+
+                status:
+                newStatus
+
+            }
+
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(
+        error
+        );
+
+        alert(
+        "Impossible de modifier la commande."
+        );
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.login-box h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    background: #2b2520;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .login-button:disabled {
     opacity: 0.6;
 }
