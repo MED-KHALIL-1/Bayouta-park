@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bayouta Park</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f0e8;
+        color: #2b2520;
+    }
+
+    /* HEADER */
+    header {
+        background: #2b2520;
+        color: #f5f0e8;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .logo {
+        font-size: 30px;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        margin-top: 5px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    /* CART BUTTON */
+    .cart-button {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        background: #d6b77c;
+        color: #2b2520;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 23px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .cart-button:hover {
+        transform: scale(1.08);
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #b33a2b;
+        color: white;
+        font-size: 12px;
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* MENU */
+    .menu-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 30px 15px 80px;
+    }
+
+    .category-title {
+        text-align: center;
+        margin: 35px 0 20px;
+        font-size: 27px;
+        color: #2b2520;
+    }
+
+    .category-title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #d6b77c;
+        margin: 10px auto;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .product {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: 0.2s;
+    }
+
+    .product:hover {
+        transform: translateY(-4px);
+    }
+
+    .product img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+    }
+
+    .product-info {
+        padding: 15px;
+    }
+
+    .product h3 {
+        margin-bottom: 8px;
+        font-size: 18px;
+    }
+
+    .product p {
+        color: #777;
+        font-size: 13px;
+        min-height: 35px;
+    }
+
+    .product-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    .price {
+        font-weight: bold;
+        color: #8a6a35;
+    }
+
+    .add-button {
+        background: #2b2520;
+        color: white;
+        border: none;
+        padding: 9px 13px;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    .add-button:hover {
+        background: #8a6a35;
+    }
+
+    /* CART OVERLAY */
+    .cart-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.55);
+        display: none;
+        z-index: 1000;
+    }
+
+    .cart-overlay.active {
+        display: block;
+    }
+
+    /* CART */
+    .cart {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        max-width: 450px;
+        background: #f5f0e8;
+        padding: 25px;
+        overflow-y: auto;
+        animation: slideIn 0.25s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .cart-header h2 {
+        font-size: 25px;
+    }
+
+    .close-cart {
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    .empty-cart {
+        text-align: center;
+        color: #777;
+        margin-top: 50px;
+    }
+
+    /* CART ITEMS */
+    .cart-item {
+        background: white;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .cart-item-top {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+    }
+
+    .cart-item-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .quantity-controls button {
+        width: 28px;
+        height: 28px;
+        border: none;
+        background: #2b2520;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .remove-button {
+        background: none;
+        border: none;
+        color: #b33a2b;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    /* TOTAL */
+    .cart-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 25px 0;
+        padding-top: 15px;
+        border-top: 2px solid #d6b77c;
+    }
+
+    /* ORDER FORM */
+    .order-form {
+        background: white;
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .order-form h3 {
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        font-size: 15px;
+    }
+
+    .place-order {
+        width: 100%;
+        padding: 14px;
+        background: #2b2520;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .place-order:hover {
+        background: #8a6a35;
+    }
+
+    /* SUCCESS */
+    .success-message {
+        display: none;
+        text-align: center;
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .success-message h3 {
+        margin-bottom: 8px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .products {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 550px) {
+        .products {
+            grid-template-columns: 1fr;
+        }
+
+        .logo {
+            font-size: 25px;
+        }
+
+        .cart {
+            max-width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">BAYOUTA PARK</div>
+    <div class="subtitle">Restaurant & Café</div>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+</header>
+
+<main class="menu-container">
+
+    <!-- ENTREES -->
+    <h2 class="category-title">Entrées</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Salade César</h3>
+                <p>Salade fraîche, poulet grillé et sauce César.</p>
+                <div class="product-bottom">
+                    <span class="price">12 TND</span>
+                    <button class="add-button" onclick="addToCart('Salade César', 12)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Bruschetta</h3>
+                <p>Pain grillé, tomates fraîches et basilic.</p>
+                <div class="product-bottom">
+                    <span class="price">9 TND</span>
+                    <button class="add-button" onclick="addToCart('Bruschetta', 9)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Soupe du Jour</h3>
+                <p>Une soupe chaude préparée avec des produits frais.</p>
+                <div class="product-bottom">
+                    <span class="price">7 TND</span>
+                    <button class="add-button" onclick="addToCart('Soupe du Jour', 7)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Assiette de Fromages</h3>
+                <p>Sélection de fromages servis avec pain frais.</p>
+                <div class="product-bottom">
+                    <span class="price">15 TND</span>
+                    <button class="add-button" onclick="addToCart('Assiette de Fromages', 15)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PLATS PRINCIPAUX -->
+    <h2 class="category-title">Plats Principaux</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Burger Maison</h3>
+                <p>Burger, steak haché, fromage et pommes de terre.</p>
+                <div class="product-bottom">
+                    <span class="price">22 TND</span>
+                    <button class="add-button" onclick="addToCart('Burger Maison', 22)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Pâtes Carbonara</h3>
+                <p>Pâtes crémeuses avec sauce carbonara.</p>
+                <div class="product-bottom">
+                    <span class="price">19 TND</span>
+                    <button class="add-button" onclick="addToCart('Pâtes Carbonara', 19)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Steak Grillé</h3>
+                <p>Steak grillé accompagné de légumes frais.</p>
+                <div class="product-bottom">
+                    <span class="price">35 TND</span>
+                    <button class="add-button" onclick="addToCart('Steak Grillé', 35)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1539136788836-5699e78bfc75?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Poulet Grillé</h3>
+                <p>Poulet grillé servi avec accompagnement.</p>
+                <div class="product-bottom">
+                    <span class="price">24 TND</span>
+                    <button class="add-button" onclick="addToCart('Poulet Grillé', 24)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DESSERTS -->
+    <h2 class="category-title">Desserts</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Gâteau au Chocolat</h3>
+                <p>Gâteau fondant au chocolat.</p>
+                <div class="product-bottom">
+                    <span class="price">10 TND</span>
+                    <button class="add-button" onclick="addToCart('Gâteau au Chocolat', 10)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Donuts</h3>
+                <p>Donuts moelleux avec glaçage.</p>
+                <div class="product-bottom">
+                    <span class="price">6 TND</span>
+                    <button class="add-button" onclick="addToCart('Donuts', 6)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Glace</h3>
+                <p>Glace artisanale avec plusieurs parfums.</p>
+                <div class="product-bottom">
+                    <span class="price">8 TND</span>
+                    <button class="add-button" onclick="addToCart('Glace', 8)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Tiramisu</h3>
+                <p>Tiramisu italien classique.</p>
+                <div class="product-bottom">
+                    <span class="price">11 TND</span>
+                    <button class="add-button" onclick="addToCart('Tiramisu', 11)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOISSONS -->
+    <h2 class="category-title">Boissons</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Coca-Cola</h3>
+                <p>Boisson fraîche.</p>
+                <div class="product-bottom">
+                    <span class="price">4 TND</span>
+                    <button class="add-button" onclick="addToCart('Coca-Cola', 4)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Jus d'Orange</h3>
+                <p>Jus d'orange frais.</p>
+                <div class="product-bottom">
+                    <span class="price">7 TND</span>
+                    <button class="add-button" onclick="addToCart('Jus d Orange', 7)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Eau Minérale</h3>
+                <p>Eau minérale fraîche.</p>
+                <div class="product-bottom">
+                    <span class="price">2 TND</span>
+                    <button class="add-button" onclick="addToCart('Eau Minérale', 2)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80">
+            <div class="product-info">
+                <h3>Café</h3>
+                <p>Café fraîchement préparé.</p>
+                <div class="product-bottom">
+                    <span class="price">5 TND</span>
+                    <button class="add-button" onclick="addToCart('Café', 5)">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay">
+
+    <div class="cart">
+
+        <div class="cart-header">
+            <h2>Votre commande</h2>
+
+            <button class="close-cart" onclick="closeCart()">
+                ×
+            </button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cartTotal">0 TND</span>
+        </div>
+
+        <!-- ORDER FORM -->
+        <div class="order-form">
+
+            <h3>Informations de commande</h3>
+
+            <div class="form-group">
+                <label for="customerName">
+                    Nom du client (optionnel)
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Votre nom"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="tableNumber">
+                    Numéro de table *
+                </label>
+
+                <input
+                    type="number"
+                    id="tableNumber"
+                    placeholder="Ex: 5"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <button class="place-order" onclick="placeOrder()">
+                Confirmer la commande
+            </button>
+
+        </div>
+
+        <div class="success-message" id="successMessage">
+
+            <h3>Commande envoyée ! ✓</h3>
+
+            <p>
+                Votre commande a été envoyée à la cuisine.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let cart = [];
+
+
+/* ADD TO CART */
+
+function addToCart(name, price) {
+
+    const existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+
+        existingItem.quantity++;
+
+    } else {
+
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+
+    }
+
+    updateCart();
+
+}
+
+
+/* UPDATE CART */
+
+function updateCart() {
+
+    const cartItems = document.getElementById("cartItems");
+
+    const cartCount = document.getElementById("cartCount");
+
+    const cartTotal = document.getElementById("cartTotal");
+
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    let totalQuantity = 0;
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML =
+            '<div class="empty-cart">Votre panier est vide.</div>';
+
+    }
+
+
+    cart.forEach((item, index) => {
+
+        const itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        totalQuantity += item.quantity;
+
+
+        cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-item-top">
+
+                    <span>${item.name}</span>
+
+                    <span>${itemTotal} TND</span>
+
+                </div>
+
+
+                <div class="cart-item-bottom">
+
+                    <div class="quantity-controls">
+
+                        <button onclick="changeQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <span>${item.quantity}</span>
+
+                        <button onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-button"
+                        onclick="removeItem(${index})"
+                    >
+                        Supprimer
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    cartCount.textContent = totalQuantity;
+
+    cartTotal.textContent = total + " TND";
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* REMOVE ITEM */
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+/* OPEN CART */
+
+function openCart() {
+
+    document
+        .getElementById("cartOverlay")
+        .classList
+        .add("active");
+
+}
+
+
+/* CLOSE CART */
+
+function closeCart() {
+
+    document
+        .getElementById("cartOverlay")
+        .classList
+        .remove("active");
+
+}
+
+
+/* CLOSE CART WHEN CLICKING OUTSIDE */
+
+document
+    .getElementById("cartOverlay")
+    .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+
+            closeCart();
+
+        }
+
+    });
+
+
+/* PLACE ORDER */
+
+function placeOrder() {
+
+    if (cart.length === 0) {
+
+        alert("Votre panier est vide.");
+
+        return;
+
+    }
+
+
+    const customerName =
+        document
+        .getElementById("customerName")
+        .value
+        .trim();
+
+
+    const tableNumber =
+        document
+        .getElementById("tableNumber")
+        .value
+        .trim();
+
+
+    if (!tableNumber) {
+
+        alert("Veuillez entrer votre numéro de table.");
+
+        return;
+
+    }
+
+
+    const order = {
+
+        customerName:
+            customerName || "Client",
+
+        tableNumber:
+            tableNumber,
+
+        items:
+            cart,
+
+        total:
+            cart.reduce(
+                (sum, item) =>
+                    sum + item.price * item.quantity,
+                0
+            ),
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    console.log("Order:", order);
+
+
+    document
+        .getElementById("successMessage")
+        .style
+        .display = "block";
+
+
+    cart = [];
+
+    updateCart();
+
+
+    document
+        .getElementById("customerName")
+        .value = "";
+
+
+    document
+        .getElementById("tableNumber")
+        .value = "";
+
+}
+
+</script>
+
+</body>
+</html>
