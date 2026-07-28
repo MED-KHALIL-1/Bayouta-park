@@ -25,8 +25,8 @@ body {
 #loginPage {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 20px;
 }
 
@@ -41,7 +41,7 @@ body {
 
 .login-box h1 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .login-box p {
@@ -56,8 +56,8 @@ body {
 
 .form-group label {
     display: block;
-    font-weight: bold;
     margin-bottom: 7px;
+    font-weight: bold;
 }
 
 .form-group input {
@@ -71,10 +71,10 @@ body {
 .login-button {
     width: 100%;
     padding: 14px;
-    background: #2b2520;
-    color: white;
     border: none;
     border-radius: 7px;
+    background: #2b2520;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -196,7 +196,8 @@ header {
 
 .table {
     background: #d6b77c;
-    padding: 8px 14px;
+    color: #2b2520;
+    padding: 7px 12px;
     border-radius: 20px;
     font-weight: bold;
 }
@@ -232,7 +233,9 @@ header {
     padding: 15px 0;
 }
 
-button.action-button {
+/* ================= BUTTONS ================= */
+
+.action-button {
     width: 100%;
     padding: 13px;
     border: none;
@@ -245,6 +248,10 @@ button.action-button {
 
 .accept-button {
     background: #2196f3;
+}
+
+.ready-button {
+    background: #ff9800;
 }
 
 .delivered-button {
@@ -288,8 +295,11 @@ button.action-button {
         <div
         class="login-error"
         id="loginError">
+
         Email ou mot de passe incorrect.
+
         </div>
+
 
         <div class="form-group">
 
@@ -371,18 +381,23 @@ button.action-button {
 <main class="orders-container">
 
 
-<!-- NEW -->
+<!-- ================= NEW ORDERS ================= -->
 
 <div class="status-section">
 
     <div class="status-title">
+
     🆕 Nouvelles commandes
+
     </div>
+
 
     <div id="newOrders">
 
         <div class="no-orders">
+
         Aucune nouvelle commande
+
         </div>
 
     </div>
@@ -390,18 +405,23 @@ button.action-button {
 </div>
 
 
-<!-- PREPARING -->
+<!-- ================= PREPARING ORDERS ================= -->
 
 <div class="status-section">
 
     <div class="status-title">
+
     🔵 En préparation
+
     </div>
+
 
     <div id="preparingOrders">
 
         <div class="no-orders">
+
         Aucune commande en préparation
+
         </div>
 
     </div>
@@ -409,18 +429,23 @@ button.action-button {
 </div>
 
 
-<!-- DONE -->
+<!-- ================= DONE ORDERS ================= -->
 
 <div class="status-section">
 
     <div class="status-title">
+
     🟢 Commandes prêtes
+
     </div>
+
 
     <div id="doneOrders">
 
         <div class="no-orders">
+
         Aucune commande prête
+
         </div>
 
     </div>
@@ -436,7 +461,7 @@ button.action-button {
 <script type="module">
 
 
-/* ================= FIREBASE ================= */
+/* ================= FIREBASE IMPORTS ================= */
 
 
 import {
@@ -464,7 +489,7 @@ import {
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* ================= CONFIG ================= */
+/* ================= FIREBASE CONFIG ================= */
 
 
 const firebaseConfig = {
@@ -502,10 +527,14 @@ const db =
 getFirestore(app);
 
 
+let unsubscribeOrders = null;
+
+
 /* ================= LOGIN ================= */
 
 
 window.login = async function() {
+
 
     const email =
     document
@@ -525,7 +554,38 @@ window.login = async function() {
     .getElementById("loginError");
 
 
+    const button =
+    document
+    .getElementById("loginButton");
+
+
+    if (!email || !password) {
+
+        error.textContent =
+        "Veuillez entrer votre email et votre mot de passe.";
+
+        error.style.display =
+        "block";
+
+        return;
+
+    }
+
+
+    button.disabled =
+    true;
+
+
+    button.textContent =
+    "Connexion...";
+
+
+    error.style.display =
+    "none";
+
+
     try {
+
 
         await signInWithEmailAndPassword(
 
@@ -537,37 +597,39 @@ window.login = async function() {
 
         );
 
-        error.style.display =
-        "none";
 
     }
 
+
     catch(errorObject) {
 
-        console.error(errorObject);
+
+        console.error(
+        errorObject
+        );
+
 
         error.textContent =
         "Email ou mot de passe incorrect.";
 
+
         error.style.display =
         "block";
+
+
+        button.disabled =
+        false;
+
+
+        button.textContent =
+        "Se connecter";
 
     }
 
 };
 
 
-/* ================= LOGOUT ================= */
-
-
-window.logout = async function() {
-
-    await signOut(auth);
-
-};
-
-
-/* ================= AUTH ================= */
+/* ================= AUTH STATE ================= */
 
 
 onAuthStateChanged(
@@ -576,7 +638,9 @@ onAuthStateChanged(
 
     function(user) {
 
-        if(user) {
+
+        if (user) {
+
 
             document
             .getElementById("loginPage")
@@ -596,7 +660,9 @@ onAuthStateChanged(
 
         }
 
+
         else {
+
 
             document
             .getElementById("loginPage")
@@ -611,6 +677,16 @@ onAuthStateChanged(
             .display =
             "none";
 
+
+            if (unsubscribeOrders) {
+
+                unsubscribeOrders();
+
+                unsubscribeOrders =
+                null;
+
+            }
+
         }
 
     }
@@ -618,20 +694,29 @@ onAuthStateChanged(
 );
 
 
+/* ================= LOGOUT ================= */
+
+
+window.logout = async function() {
+
+    await signOut(auth);
+
+};
+
+
 /* ================= LOAD ORDERS ================= */
 
 
 /*
-IMPORTANT:
-
 We listen to ALL orders.
 
-We do NOT use:
+The page displays only:
 
-where("status", "==", "new")
+new
+preparing
+done
 
-Therefore an order will NOT disappear
-just because its status changes.
+Delivered orders disappear.
 */
 
 
@@ -643,12 +728,15 @@ function loadOrders() {
     .getElementById("connection");
 
 
+    unsubscribeOrders =
+
     onSnapshot(
 
         collection(
         db,
         "orders"
         ),
+
 
         function(snapshot) {
 
@@ -705,102 +793,100 @@ function loadOrders() {
                     orderDoc.data();
 
 
-                    const id =
+                    const orderId =
                     orderDoc.id;
 
 
-                    /*
-                    NEW
-                    */
-
-                    if(
+                    if (
                     order.status === "new"
                     ) {
+
 
                         newOrders
                         .appendChild(
 
                             createOrderCard(
-                            id,
-                            order,
-                            "new"
+
+                                orderId,
+
+                                order,
+
+                                "new"
+
                             )
 
                         );
 
+
                         newCount++;
+
 
                     }
 
 
-                    /*
-                    PREPARING
-                    */
-
-                    else if(
+                    else if (
                     order.status === "preparing"
                     ) {
+
 
                         preparingOrders
                         .appendChild(
 
                             createOrderCard(
-                            id,
-                            order,
-                            "preparing"
+
+                                orderId,
+
+                                order,
+
+                                "preparing"
+
                             )
 
                         );
 
+
                         preparingCount++;
+
 
                     }
 
 
-                    /*
-                    DONE
-                    */
-
-                    else if(
+                    else if (
                     order.status === "done"
                     ) {
+
 
                         doneOrders
                         .appendChild(
 
                             createOrderCard(
-                            id,
-                            order,
-                            "done"
+
+                                orderId,
+
+                                order,
+
+                                "done"
+
                             )
 
                         );
 
+
                         doneCount++;
+
 
                     }
 
-
-                    /*
-                    DELIVERED
-
-                    If status is delivered,
-                    we do nothing.
-
-                    It disappears from the
-                    active reception dashboard.
-
-                    But it remains in Firebase.
-                    */
 
                 }
 
             );
 
 
-            if(
+            if (
             newCount === 0
             ) {
+
 
                 newOrders.innerHTML = `
 
@@ -815,9 +901,10 @@ function loadOrders() {
             }
 
 
-            if(
+            if (
             preparingCount === 0
             ) {
+
 
                 preparingOrders.innerHTML = `
 
@@ -832,9 +919,10 @@ function loadOrders() {
             }
 
 
-            if(
+            if (
             doneCount === 0
             ) {
+
 
                 doneOrders.innerHTML = `
 
@@ -854,10 +942,15 @@ function loadOrders() {
 
         function(error) {
 
-            console.error(error);
+
+            console.error(
+            error
+            );
+
 
             connection.textContent =
-            "🔴 Erreur de connexion";
+            "🔴 Erreur de connexion aux commandes";
+
 
         }
 
@@ -889,7 +982,7 @@ function createOrderCard(
     "order-card";
 
 
-    if(
+    if (
     status === "new"
     ) {
 
@@ -900,7 +993,7 @@ function createOrderCard(
     }
 
 
-    if(
+    if (
     status === "preparing"
     ) {
 
@@ -911,7 +1004,7 @@ function createOrderCard(
     }
 
 
-    if(
+    if (
     status === "done"
     ) {
 
@@ -926,7 +1019,7 @@ function createOrderCard(
     "";
 
 
-    if(
+    if (
     order.items &&
     Array.isArray(order.items)
     ) {
@@ -949,12 +1042,14 @@ function createOrderCard(
 
                     </span>
 
+
                     <span>
 
                     ${
                     item.price *
                     item.quantity
                     }
+
                     TND
 
                     </span>
@@ -962,6 +1057,7 @@ function createOrderCard(
                 </div>
 
                 `;
+
 
             }
 
@@ -974,23 +1070,29 @@ function createOrderCard(
     "Heure inconnue";
 
 
-    if(
+    if (
     order.createdAt
     ) {
 
+
         try {
+
 
             timeText =
             order.createdAt
             .toDate()
             .toLocaleString("fr-FR");
 
+
         }
+
 
         catch(error) {
 
+
             timeText =
             "Heure inconnue";
+
 
         }
 
@@ -1010,25 +1112,26 @@ function createOrderCard(
     "";
 
 
-    /*
-    NEW:
-
-    Accept
-    new -> preparing
-    */
+    /* ================= NEW ================= */
 
 
-    if(
+    if (
     status === "new"
     ) {
+
 
         buttonHTML = `
 
         <button
+
         class="action-button accept-button"
+
         onclick="changeStatus(
+
         '${orderId}',
+
         'preparing'
+
         )">
 
         ✓ Accepter
@@ -1038,30 +1141,62 @@ function createOrderCard(
 
         `;
 
+
     }
 
 
-    /*
-    DONE:
-
-    Delivered
-    done -> delivered
-
-    Then it disappears.
-    */
+    /* ================= PREPARING ================= */
 
 
-    if(
-    status === "done"
+    if (
+    status === "preparing"
     ) {
+
 
         buttonHTML = `
 
         <button
-        class="action-button delivered-button"
+
+        class="action-button ready-button"
+
         onclick="changeStatus(
+
         '${orderId}',
+
+        'done'
+
+        )">
+
+        ✓ Marquer comme prête
+
+        </button>
+
+        `;
+
+
+    }
+
+
+    /* ================= DONE ================= */
+
+
+    if (
+    status === "done"
+    ) {
+
+
+        buttonHTML = `
+
+        <button
+
+        class="action-button delivered-button"
+
+        onclick="changeStatus(
+
+        '${orderId}',
+
         'delivered'
+
         )">
 
         ✓ Commande livrée
@@ -1070,10 +1205,12 @@ function createOrderCard(
 
         `;
 
+
     }
 
 
     card.innerHTML = `
+
 
     <div class="order-header">
 
@@ -1121,6 +1258,7 @@ function createOrderCard(
 
     <div class="total">
 
+
         <span>
 
         Total
@@ -1134,6 +1272,7 @@ function createOrderCard(
         TND
 
         </span>
+
 
     </div>
 
@@ -1161,14 +1300,6 @@ window.changeStatus = async function(
 ) {
 
 
-    console.log(
-    "Changing order:",
-    orderId,
-    "to:",
-    newStatus
-    );
-
-
     try {
 
 
@@ -1184,6 +1315,7 @@ window.changeStatus = async function(
 
             ),
 
+
             {
 
                 status:
@@ -1194,12 +1326,6 @@ window.changeStatus = async function(
         );
 
 
-        console.log(
-        "Status successfully changed to:",
-        newStatus
-        );
-
-
     }
 
 
@@ -1207,7 +1333,6 @@ window.changeStatus = async function(
 
 
         console.error(
-        "Error changing status:",
         error
         );
 
@@ -1219,6 +1344,7 @@ window.changeStatus = async function(
         error.message
 
         );
+
 
     }
 
